@@ -3,8 +3,8 @@
      <map></map>
     <div class="emil">
       <ul>
-         <li>地址</li>
-         <li>我的</li>
+         <li class="icon iconfont icon-dizhiguanli"></li>
+         <li class="icon iconfont icon-wode" @click="handMy"></li>
       </ul>
     </div>
   </div>
@@ -21,7 +21,7 @@ export default {
   },
 
   methods: {
-    bindViewTap () {
+    handMy () {
       const url = '../logs/main'
       if (mpvuePlatform === 'wx') {
         mpvue.switchTab({ url })
@@ -42,6 +42,7 @@ export default {
 </script>
 
 <style scoped>
+@import "../../font/iconfont.css";
 page,view,map{
   width:100%;
   height:100%;
@@ -51,7 +52,7 @@ page,view,map{
   width:100%;
   height:100px;
   left:0;
-  top: 94%;
+  top: 90%;
 }
 .emil ul{
   width:100%;
@@ -60,13 +61,17 @@ page,view,map{
   align-items: center;
 }
 .emil ul li:first-of-type{
-  font-size:15px;
+  font-size:30px;
   text-align:left;
   padding-left:15px;
+  color:#197dbf;
+  font-weight: 800
 }
 .emil ul li:last-of-type{
-  font-size:15px;
+  font-size:30px;
   text-align:right;
   padding-right:15px;
+   color:#197dbf;
+   font-weight: 800
 }
 </style>

@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/index/main",//登陆
-    "pages/information/main",//放弃
+    "pages/index/main",
+    "pages/information/main",
     "pages/clock/main",
     "pages/customer/main",
     "pages/interview/main",
