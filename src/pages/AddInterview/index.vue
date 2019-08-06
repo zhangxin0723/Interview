@@ -90,6 +90,7 @@ label:nth-last-child(1) {
   color: #fff;
   outline: none;
   border: none;
+  border-radius: 0;
 }
 .comment {
   width: 90%;

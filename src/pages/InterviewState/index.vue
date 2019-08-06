@@ -21,15 +21,7 @@
         <span>面试状态：</span>
         <p>未开始</p>
       </label>
-      <label for>
-        <span>取消提醒：</span>
-        <p>未开始</p>
-      </label>
     </form>
-    <div class="choose">
-      <button>去打卡</button>
-      <button>放弃面试</button>
-    </div>
   </div>
 </template>
 <script>
@@ -77,25 +69,5 @@ label p {
   height: 100%;
   line-height: 100rpx;
   padding-left: 30rpx;
-}
-.choose {
-  width: 100%;
-  display: flex;
-  padding: 0 20rpx;
-  margin-top: 80rpx;
-}
-.choose button {
-  flex: 1;
-  margin-right: 30rpx;
-  outline: none;
-  border: none;
-  color: #fff;
-  border-radius: 0;
-}
-.choose button:nth-child(1){
-  background: #197dbf;
-}
-.choose button:nth-child(2){
-  background: #c30;
 }
 </style>
