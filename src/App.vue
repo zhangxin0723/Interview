@@ -39,7 +39,10 @@ export default {
   padding: 200rpx 0;
   box-sizing: border-box;
 }
-
+page{
+    width:100%;
+    height:100%;
+}
 /* this rule will be remove */
 * {
   transition: width 2s;
