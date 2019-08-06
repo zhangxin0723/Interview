@@ -3,20 +3,20 @@
     <div class="title">面试信息</div>
     <form action>
       <label for>
-        <span>公司名称</span>
+        <span>公司名称：</span>
         <input type="text" placeholder="请输入公司名称" />
       </label>
       <label for>
-        <span>公司电话</span>
+        <span>公司电话：</span>
         <input type="text" placeholder="请输入面试联系人电话" />
       </label>
       <label for>
-        <span>面试时间</span>
+        <span>面试时间：</span>
         <input type="text" placeholder="2019-08-06 17:00" />
         <i class="icon">!</i>
       </label>
       <label for>
-        <span>面试地址</span>
+        <span>面试地址：</span>
         <input type="text" placeholder="请选择面试地址" />
       </label>
     </form>
@@ -59,12 +59,13 @@ label {
   border-bottom: 1rpx solid #eee;
 }
 label span {
-  width: 20%;
+  width: 22%;
   text-align: center;
+  color: #9b9b9b;
 }
 label input {
   height: 100%;
-  padding-left: 50rpx;
+  padding-left: 30rpx;
 }
 label:nth-last-child(1) {
   border-bottom: none;
