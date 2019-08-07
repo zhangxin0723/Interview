@@ -4,6 +4,10 @@
     "pages/InterviewDetail/main",
     "pages/AddInterview/main",
     "pages/index/main",
+    "pages/information/main",
+    "pages/clock/main",
+    "pages/customer/main",
+    "pages/interview/main",
     "pages/logs/main",
     "pages/counter/main"
   ],

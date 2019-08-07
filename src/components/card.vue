@@ -1,8 +1,10 @@
 <template>
-  <div>
-    <p class="card">
-      {{text}}
-    </p>
+  <div class="Interview">
+   <div class="nav">
+      <span>＜</span>
+      <span>面试列表</span>
+      <span></span>
+    </div>
   </div>
 </template>
 
@@ -13,7 +15,5 @@ export default {
 </script>
 
 <style>
-.card {
-  padding: 10px;
-}
+ 
 </style>
