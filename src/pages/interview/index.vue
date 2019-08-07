@@ -2,18 +2,16 @@
   <div class="Interview">
    
     <ul class="carded">
-      <li class="active">未开始</li>
-      <li>已打卡</li>
-      <li>已放弃</li>
-      <li>全部</li>
-    </ul>
+      <li v-for="(item,index) in data" :key=index @click="clockId(index,colorId=0,whole)" :class = "{active:colorId==index}"> {{item}} </li>
+   </ul>
     <div class="footer">
-      <ul>
-         <li>北京八维研究学院</li>
-         <li>北京海淀上地软件园87号</li>
+    
+      <ul v-for="(item,index) in viewList" :key=index>
+         <li>{{item.company}}</li>
+         <li>{{item.address?item.address:item.address.address}}</li>
          <li>
            <span>面试时间:2019-08-06 17:00</span>
-           <span>为提醒</span>
+           <span>{{item.create_time-start_time>start_time?'未提醒':'提醒'}}</span>
          </li>
       </ul>
     </div>
@@ -24,29 +22,38 @@
 import { formatTime } from '@/utils/index'
 import card from '@/components/card'
 import {sing} from '@/service/user.js'
+import {mapState, mapActions} from 'vuex';
 export default {
-  components: {
-    card
+  data() {
+    return {
+        data:["未开始","已打卡","已放弃","全部"],
+        colorId:0,
+        whole:false
+    };
   },
-   created () {
-    // 调用API从本地缓存中获取数据
-    /*
-     * 平台 api 差异的处理方式:  api 方法统一挂载到 mpvue 名称空间, 平台判断通过 mpvuePlatform 特征字符串
-     * 微信：mpvue === wx, mpvuePlatform === 'wx'
-     * 头条：mpvue === tt, mpvuePlatform === 'tt'
-     * 百度：mpvue === swan, mpvuePlatform === 'swan'
-     * 支付宝(蚂蚁)：mpvue === my, mpvuePlatform === 'my'
-     */
-
-    
-    // 调用登陆接口
-    wx.request({
-      success:function(res){
-        console.log('999', res);
-      }
+  computed: {
+     ...mapState({
+      viewList: state=>state.interview.viewList,
     })
+  },
+  methods: {
+      ...mapActions({
+      sign: 'interview/getLocation'
+    }),
+  goDetail:()=>{
+      const url = '../detail/main'
+       mpvue.navigateTo({url})
+   },
+   clockId:function(index,colorId,whole){
+        this.colorId = index;
+        console.log(whole)
+   }
+  },
+  created() {
+   this.sign()
+  
   }
-}
+};
 </script>
 
 <style  scoped>
