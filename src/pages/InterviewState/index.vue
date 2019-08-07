@@ -3,15 +3,15 @@
     <form action>
       <label for>
         <span>面试地址：</span>
-        <input type="text" placeholder="请输入公司名称" />
+        <p>请输入公司名称</p>
       </label>
       <label for>
         <span>面试时间：</span>
-        <input type="text" placeholder="2019-08-06 17:00" />
+        <p>2019-08-06 17:00</p>
       </label>
       <label for>
         <span>联系方式：</span>
-        <input type="text" placeholder="13835973692" />
+        <p>13835973692</p>
       </label>
       <label for>
         <span>是否提醒：</span>

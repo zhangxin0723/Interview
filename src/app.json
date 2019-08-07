@@ -1,9 +1,9 @@
 {
   "pages": [
+    "pages/home/main",
+    "pages/AddInterview/main",
     "pages/InterviewState/main",
     "pages/InterviewDetail/main",
-    "pages/AddInterview/main",
-    "pages/index/main",
     "pages/information/main",
     "pages/clock/main",
     "pages/customer/main",

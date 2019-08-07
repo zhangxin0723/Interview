@@ -1,9 +1,15 @@
 <template>
   <div @click="clickHandle" class="wrap">
-    <map></map>
+    <map
+      id="map"
+      show-location
+      :markers="markers"
+      :longitude="longitude"
+      :latitude="latitude"
+    ></map>
     <div class="emil">
       <ul>
-        <li class="icon iconfont icon-dizhiguanli"></li>
+        <li class="icon iconfont icon-dizhiguanli"  @click="location"></li>
         <li class="icon iconfont icon-wode" @click="handMy"></li>
       </ul>
     </div>
@@ -11,14 +17,24 @@
 </template>
 
 <script>
-import card from "@/components/card";
 
+import { mapState , mapActions } from 'vuex';
 export default {
   components: {
-    card
+    
   },
 
+  computed: {
+    ...mapState({
+      longitude: state=>state.home.longitude,
+      latitude: state=>state.home.latitude
+    })
+  },
+  
   methods: {
+    ...mapActions({
+      location: 'home/getLocation'
+    }),
     handMy() {
       const url = "../logs/main";
       if (mpvuePlatform === "wx") {

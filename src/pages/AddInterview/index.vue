@@ -4,11 +4,11 @@
     <form action>
       <label for>
         <span>公司名称：</span>
-        <input type="text" placeholder="请输入公司名称" />
+        <input type="text" placeholder="请输入公司名称" v-model="company"/>
       </label>
       <label for>
         <span>公司电话：</span>
-        <input type="text" placeholder="请输入面试联系人电话" />
+        <input type="text" placeholder="请输入面试联系人电话" v-model="phone" />
       </label>
       <label for>
         <span>面试时间：</span>
@@ -22,7 +22,7 @@
     </form>
     <div class="title">备注信息</div>
     <textarea name id cols="30" rows="10" class="comment" placeholder="备注信息（可选，100个字以内"></textarea>
-    <button class="cure">确认</button>
+    <button class="cure" @click="cure">确认</button>
   </div>
 </template>
 <script>
@@ -30,10 +30,29 @@ export default {
   props: {},
   components: {},
   data() {
-    return {};
+    return {
+      company: "",
+      phone: ""
+    };
   },
   computed: {},
-  methods: {},
+  methods: {
+    cure(){
+      console.log(this.company,this.phone)
+      let that= this;
+      wx.showModal({
+        title: '提示',
+        content: '这是一个模态弹窗',
+        success (res) {
+          if (res.confirm) {
+            console.log('用户点击确定',that.company)
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      })
+    }
+  },
   created() {},
   mounted() {}
 };

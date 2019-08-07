@@ -54,4 +54,7 @@ page{
   text-decoration:none;
   box-sizing: border-box ;
 }
+page, page>view{
+  height: 100%;
+}
 </style>
