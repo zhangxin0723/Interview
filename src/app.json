@@ -6,7 +6,6 @@
     "pages/customer/main",
     "pages/interview/main",
     "pages/logs/main",
-   
     "pages/counter/main"
   ]
 }
