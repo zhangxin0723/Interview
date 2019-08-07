@@ -1,10 +1,6 @@
 <template>
   <div class="Interview">
-    <div class="nav">
-      <span>＜</span>
-      <span>面试列表</span>
-      <span></span>
-    </div>
+   
     <ul class="carded">
       <li class="active">未开始</li>
       <li>已打卡</li>
@@ -27,15 +23,29 @@
 <script>
 import { formatTime } from '@/utils/index'
 import card from '@/components/card'
-
+import {sing} from '@/service/user.js'
 export default {
   components: {
     card
   },
+   created () {
+    // 调用API从本地缓存中获取数据
+    /*
+     * 平台 api 差异的处理方式:  api 方法统一挂载到 mpvue 名称空间, 平台判断通过 mpvuePlatform 特征字符串
+     * 微信：mpvue === wx, mpvuePlatform === 'wx'
+     * 头条：mpvue === tt, mpvuePlatform === 'tt'
+     * 百度：mpvue === swan, mpvuePlatform === 'swan'
+     * 支付宝(蚂蚁)：mpvue === my, mpvuePlatform === 'my'
+     */
 
- 
-
-
+    
+    // 调用登陆接口
+    wx.request({
+      success:function(res){
+        console.log('999', res);
+      }
+    })
+  }
 }
 </script>
 
@@ -47,25 +57,7 @@ export default {
    flex-direction:column;
    background:#eeeeee;
 }
-.nav{
-  width:100%;
-  height:30px;
-  display:flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding:10px;
-  background:#fff;
-  border-bottom:1px solid #eeeeee;
-  padding:10px;
-}
-.nav span{
-    font-size:20px;
-    padding:10px 0;
-    color:#666666;
-}
-.nav span:nth-of-type(2){
-  margin-left:10px;
-}
+
 .carded{
   display:flex;
   justify-content: space-between;

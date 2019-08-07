@@ -12,7 +12,7 @@ export default {
      * 支付宝(蚂蚁)：mpvue === my, mpvuePlatform === 'my'
      */
 
-
+    
     // 调用登陆接口
     wx.login({
       success: async (res)=>{
@@ -53,5 +53,8 @@ page{
   padding:0;
   text-decoration:none;
   box-sizing: border-box ;
+}
+page, page>view{
+  height: 100%;
 }
 </style>

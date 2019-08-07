@@ -1,8 +1,12 @@
 <template>
   <div class="login">
-    
+    <div class="nav">
+      <span>＜</span>
+      <span>个人中心</span>
+      <span></span>
+    </div>
      <ul class="header">
-       <li class="icon iconfont">&#xe678;</li>
+       <li></li>
        <li>187****3253</li>
      </ul>
      <div class="footer">
@@ -16,7 +20,7 @@
        <ol>
          <li>
            <span>!</span>
-           <span @click="service">客服中心</span>
+           <span>客服中心</span>
          </li>
          <li>></li>
        </ol>
@@ -32,30 +36,33 @@ export default {
   components: {
     card
   },
-  methods: {
-    service:e=> {
-      wx.navigateTo({
-        url: "/pages/customer/main"
-      })
-      
-    },
-   
-  },
+
  
 
 
 }
 </script>
-<style  scoped>
-@import "../../font/iconfont.css";
 
+<style  scoped>
  .login{
    width:100%;
    height:100%;
    display:flex;
    flex-direction:column;
 }
-
+.nav{
+  width:100%;
+  height:30px;
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  padding:10px;
+}
+.nav span{
+    font-size:14px;
+    padding:10px 0;
+    color:#666666;
+}
 .header{
     width:100%;
     height:100px;
@@ -66,7 +73,6 @@ export default {
     align-items: center;
     padding-top:20px;
     padding-bottom:20px;
-    padding-top:40px;
 }
 .header li:first-of-type{
    width:80px;
@@ -74,17 +80,12 @@ export default {
    display:inline-block;
    border-radius:50%;
    background:#fff;
-   text-align:center;
-   line-height:80px;
-   color:#10aeff;
-   font-size:40px;
 }
 .header li:last-of-type{
    font-size:20px;
    margin-top:20px;
    text-align:center;
    color:#000000;
-   padding-bottom:20px;
 }
 .footer{
   flex:1;
