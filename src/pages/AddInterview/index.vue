@@ -12,7 +12,16 @@
       </label>
       <label for>
         <span>面试时间：</span>
-        <input type="text" placeholder="2019-08-06 17:00" />
+        <!-- <input type="text" placeholder="2019-08-06 17:00" /> -->
+        <p>
+          <view class="section">
+            <picker mode="date" value="date" start="2015-09-01" end="2017-09-01" @change="bindDateChange">
+              <view class="picker">
+                {{date}}
+              </view>
+            </picker>
+          </view>
+        </p>
         <i class="icon" @click="toast">!</i>
       </label>
       <label for>
@@ -34,7 +43,8 @@ export default {
   data() {
     return {
       company: "",
-      phone: ""
+      phone: "",
+       date: '2016-09-01'
     };
   },
   computed: {
@@ -84,6 +94,10 @@ export default {
               console.log(res,'res...')
           }
       })
+    },
+    //日期
+     bindDateChange: function(e) {
+      this.date= e.mp.detail.value
     }
   },
   created() {},
@@ -138,7 +152,7 @@ label:nth-last-child(1) {
   text-align: center;
   line-height: 50rpx;
   color: #fff;
-  margin-left: 90rpx;
+  margin-right: 90rpx;
 }
 .cure {
   width: 100%;
