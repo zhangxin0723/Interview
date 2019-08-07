@@ -2,7 +2,7 @@
   <div class="address">
       <div class='header'>
           <span>北京</span>
-          <input type="text" placeholder="面试地址" v-model="city" @change="search">
+          <input type="text" placeholder="面试地址" v-model="city" @input="search">
       </div>
       <div class="addressList">
           <dl @click="checkAdd(item)"  
@@ -20,6 +20,7 @@
 <script>
 import { mapActions , mapState , mapMutations} from 'vuex'
 import "../../../font/iconfont.css"
+import  throttle from  "@/utils/debounce"
 export default {
   props:{
     
@@ -42,11 +43,11 @@ export default {
       getSuggestion: 'address/getSuggestion'
     }),
     ...mapMutations({
-      checkAddress:'address/checkAddress'
+      checkAddress: 'address/checkAddress'
     }),
     //搜索地址
     search(){
-      this.getSuggestion(this.city);
+      throttle(()=>{this.getSuggestion(this.city)},2000)
     },
     //确认地址
     checkAdd(item){
