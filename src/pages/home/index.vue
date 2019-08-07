@@ -27,7 +27,7 @@ export default {
   computed: {
     ...mapState({
       longitude: state=>state.home.longitude,
-      latitude: state=>state.home.latitude
+      latitude: state=>state.home.latitude,
     })
   },
   
@@ -56,7 +56,6 @@ export default {
 </script>
 
 <style scoped>
-@import "../../font/iconfont.css";
 page,
 view,
 map {
