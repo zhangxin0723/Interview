@@ -17,7 +17,8 @@
       </label>
       <label for>
         <span>面试地址：</span>
-        <input type="text" placeholder="请选择面试地址" @click="toAddress" :value="this.checkAddress"/>
+        <p @click="toAddress">{{checkAddress}}</p>
+        <!-- <input type="text" placeholder="请选择面试地址" @click="toAddress" :value="this.checkAddress"/> -->
       </label>
     </form>
     <div class="title">备注信息</div>
@@ -113,9 +114,16 @@ label span {
   width: 22%;
   text-align: center;
   color: #9b9b9b;
+  font-size: 32rpx
 }
 label input {
   height: 100%;
+  padding-left: 30rpx;
+}
+label p {
+  flex: 1;
+  height: 100%;
+  line-height: 100rpx;
   padding-left: 30rpx;
 }
 label:nth-last-child(1) {

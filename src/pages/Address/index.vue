@@ -4,10 +4,10 @@
           <span>北京</span>
           <input type="text" placeholder="面试地址" v-model="city" @change="search">
       </div>
-      <div class="addressList" 
-        v-for="item in addressData" 
-        :key="item.id">
-          <dl @click="checkAdd(item)">
+      <div class="addressList">
+          <dl @click="checkAdd(item)"  
+           v-for="item in addressData" 
+           :key="item.id">
             <dt><span class="icon iconfont">&#xe647;</span></dt>
             <dd>
               <h1>{{item.title}}</h1>
@@ -96,7 +96,7 @@ export default {
     dl{
       width: 100%;
       display: flex;
-      height: 110rpx;
+      padding: 10rpx 0;
       border-bottom: 1rpx solid #eee;
         dt{
           width: 10%;
@@ -111,16 +111,13 @@ export default {
         }
         dd{
           flex:1;
-          box-sizing: border-box;
           padding: 1% ;
           h1{
-            font-size: 32rpx;
-            line-height: 50rpx;
+            font-size: 36rpx;
           }
           p{
             font-size: 24rpx;
             color: #e7e7e7;
-            line-height: 40rpx;
           }
         }
     }
