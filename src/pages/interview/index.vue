@@ -1,17 +1,15 @@
 <template>
   <div class="Interview">
-   
-    <ul class="carded">
-      <li v-for="(item,index) in data" :key=index @click="clockId(index,colorId=0,whole)" :class = "{active:colorId==index}"> {{item}} </li>
+   <ul class="carded">
+      <li v-for="(item,index) in data" :key=index @click="clockId(index,colorId=0,whole,item.status)" :class = "{active:colorId==index}"> {{item.name}} </li>
    </ul>
     <div class="footer">
-    
-      <ul v-for="(item,index) in viewList" :key=index>
+      <ul v-for="(item,index) in viewList" :key=index >
          <li>{{item.company}}</li>
-         <li>{{item.address?item.address:item.address.address}}</li>
+         <li>{{item.address.address}}</li>
          <li>
-           <span>面试时间:2019-08-06 17:00</span>
-           <span>{{item.create_time-start_time>start_time?'未提醒':'提醒'}}</span>
+           <span>面试时间:{{item.start_time}}</span>
+           <span>{{item.company}}</span>
          </li>
       </ul>
     </div>
@@ -21,37 +19,54 @@
 <script>
 import { formatTime } from '@/utils/index'
 import card from '@/components/card'
-import {sing} from '@/service/user.js'
+import {sing} from '@/service/interview.js'
 import {mapState, mapActions} from 'vuex';
 export default {
   data() {
     return {
-        data:["未开始","已打卡","已放弃","全部"],
+        data:[{
+              "name":"未开始",
+              "status":-1
+            },{
+            "name":"已打卡",
+            "status":0
+            },{
+            "name":"已放弃",
+            "status":1
+            },{
+            "name":"全部",
+            "status":2
+            }],
         colorId:0,
-        whole:false
+        whole:false,
+        address:null,
     };
   },
   computed: {
+     
      ...mapState({
       viewList: state=>state.interview.viewList,
-    })
+    }),
+    
   },
   methods: {
+   
       ...mapActions({
-      sign: 'interview/getLocation'
+      sign: 'interview/getLocation',
+      
     }),
+    
   goDetail:()=>{
       const url = '../detail/main'
        mpvue.navigateTo({url})
    },
-   clockId:function(index,colorId,whole){
+   clockId:function(index,colorId,whole,status){
         this.colorId = index;
-        console.log(whole)
+          this.viewList.splice(0)
+        this.sign({status:status})
    }
   },
   created() {
-   this.sign()
-  
   }
 };
 </script>
@@ -86,6 +101,7 @@ export default {
    flex-direction: column;
    background:#fff;
    margin-top:10px;
+   overflow-y: auto;
 }
 .footer ul{
   display:flex;

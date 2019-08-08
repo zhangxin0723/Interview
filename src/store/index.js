@@ -8,13 +8,15 @@ import address from './modules/address'
 
 //面试列表
 import interview from './modules/interview'
+import list from './modules/list'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
     home,
     interview,
-    address
+    address,
+    list
   },
   plugins: [CreateLogger()]
 })

@@ -1,15 +1,11 @@
 {
   "pages": [
-<<<<<<< HEAD
-    "pages/home/main",
     "pages/interview/main",
+    "pages/home/main",
     "pages/logs/main",
     "pages/personal/main",
-=======
->>>>>>> 30ee5d38c4727c6ed4e6924f1cbe5e6294aeb789
     "pages/AddInterview/main",
     "pages/Address/main",
-    "pages/home/main",
     "pages/InterviewState/main",
     "pages/InterviewDetail/main",
     "pages/information/main",
