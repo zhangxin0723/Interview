@@ -1,141 +1,204 @@
 <template>
   <div class="Interview">
-   <ul class="carded">
-      <li v-for="(item,index) in data" :key=index @click="clockId(index,colorId=0,whole,item.status)" :class = "{active:colorId==index}"> {{item.name}} </li>
-   </ul>
+    <ul class="carded">
+      <li
+        v-for="(item,index) in data"
+        :key="index"
+        @click="clockId(index,colorId=0,whole,item.status)"
+        :class="{active:colorId==index}"
+      >
+        <span>{{item.name}}</span>
+      </li>
+    </ul>
     <div class="footer">
-      <ul v-for="(item,index) in viewList" :key=index >
-         <li>{{item.company}}</li>
-         <li>{{item.address.address}}</li>
-         <li>
-           <span>面试时间:{{item.start_time}}</span>
-           <span>{{item.remind}}</span>
-           <span>{{item.name}}</span>
-         </li>
-      </ul>
+      <div v-if="viewList.length>0">
+        <ul v-for="(item,index) in viewList" :key="index">
+          <li>
+            <span>{{item.company}}</span>
+            <span :class="{blues:item.status===0,pinks:item.status===1}">{{status}}</span>
+          </li>
+          <li>{{item.address}}</li>
+          <li>
+            <span>面试时间：{{item.start_time}}</span>
+            <span :class="{grays:item.status === 1,blues:item.status===-1}">{{item.remind === -1 ? "未提醒" : "已提醒"}}</span>
+          </li>
+        </ul>
+      </div>
+      <div v-else class="none">当前分类没有面试！</div>
     </div>
   </div>
 </template>
 
 <script>
-import { formatTime } from '@/utils/index'
-import card from '@/components/card'
-import {sing} from '@/service/interview.js'
-import {mapState, mapActions} from 'vuex';
+import { mapState, mapActions } from "vuex";
 export default {
   data() {
     return {
-        data:[{
-              "name":"未开始",
-              "status":-1
-            },{
-            "name":"已打卡",
-            "status":0
-            },{
-            "name":"已放弃",
-            "status":1
-            },{
-            "name":"全部",
-            "status":2
-            }],
-        colorId:0,
-        whole:false,
-        address:null,
+      data: [
+        {
+          name: "未开始",
+          status: -1
+        },
+        {
+          name: "已打卡",
+          status: 0
+        },
+        {
+          name: "已放弃",
+          status: 1
+        },
+        {
+          name: "全部",
+          status: 2
+        }
+      ],
+      colorId: 0,
+      whole: false,
+      address: null
     };
   },
   computed: {
-     
-     ...mapState({
-      viewList: state=>state.interview.viewList,
+    ...mapState({
+      viewList: state => state.interview.viewList
     }),
-    
+    //判断state  -1表示未开始，0表示已打卡，1表示已放弃
+    status() {
+      let str = "";
+      this.viewList.forEach(item => {
+        if (item.status === -1) {
+          str = "未开始";
+        } else if (item.status === 1) {
+          str = "已放弃";
+        } else {
+          str = "已打卡";
+        }
+      });
+      return str;
+    }
   },
   methods: {
-   
-      ...mapActions({
-      sign: 'interview/getLocation',
-      
+    ...mapActions({
+      sign: "interview/getLocation"
     }),
-    
-  goDetail:()=>{
-      const url = '../detail/main'
-       mpvue.navigateTo({url})
-   },
-   clockId:function(index,colorId,whole,status){
-        this.colorId = index;
-          this.viewList.splice(0)
-        this.sign({status:status})
-   }
+    goDetail: () => {
+      const url = "../detail/main";
+      mpvue.navigateTo({ url });
+    },
+    clockId: function(index, colorId, whole, status) {
+      this.colorId = index;
+      this.viewList.splice(0);
+      this.sign({ status });
+    }
   },
-  created() {
-  }
+  created() {}
 };
 </script>
 
 <style  scoped>
- .Interview{
-   width:100%;
-   height:100%;
-   display:flex;
-   flex-direction:column;
-   background:#eeeeee;
+.Interview {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #eeeeee;
 }
 
-.carded{
-  display:flex;
+.carded {
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  display: flex;
   justify-content: space-between;
   align-items: center;
-  background:#fff;
-  padding: 0 35rpx;
-
+  background: #fff;
+  /* padding: 0 35rpx; */
 }
-.carded li{
-  font-size:30rpx;
-  padding:20rpx 0;
+.carded li {
+  flex: 1;
+  text-align: center;
 }
-.active{
-  color:#197dbf;
-  border-bottom:1rpx solid #197dbf;
+.active span {
+  display: inline-block;
+  height: 100%;
+  color: #197dbf;
+  border-bottom: 1rpx solid #197dbf;
 }
-.footer{
-   flex:1;
-   display:flex;
-   flex-direction: column;
-   background:#fff;
-   margin-top:10rpx;
-   overflow-y: auto;
+.footer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  overflow-y: auto;
+  margin-top: 20rpx;
 }
-.footer ul{
-  display:flex;
-  flex-direction:column;
-  padding:20rpx;
+.footer ul {
+  display: flex;
+  flex-direction: column;
+  padding: 20rpx;
 }
-.footer ul li{
-  font-size:40rpx;
+.footer ul li {
+  font-size: 40rpx;
 }
-.footer ul li:first-of-type{
-  color:#000000;
+.footer ul li:first-of-type {
+  color: #000000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.footer ul li:nth-of-type(2){
-  font-size:16px;
-  color:#999999;
-  margin:10px 0;
+.footer ul li:first-of-type span:nth-child(2) {
+  padding: 12rpx 15rpx;
+  /* background: #eee;
+  color: #999999; */
+  font-size: 24rpx;
 }
-.footer ul li:last-of-type{
- display:flex;
- justify-content: space-between;
- align-items: center;
+.footer ul li:nth-of-type(2) {
+  font-size: 16px;
+  color: #999999;
+  margin: 10px 0;
 }
-.footer ul li:last-of-type span:first-of-type{
-  font-size:30rpx;
-  color:#666666;
+.footer ul li:last-of-type {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.footer ul li:last-of-type span:last-of-type,.footer ul li:last-of-type span:nth-of-type(2){
+ .footer ul li:last-of-type span:first-of-type {
+  font-size: 30rpx;
+  /* color: #666666; */
+} 
+.footer ul li:last-of-type span:last-of-type,
+.footer ul li:last-of-type span:nth-of-type(2) {
   font-size: 25rpx;
-  color: #f56c6c;
+  /* color: #f56c6c; */
   padding: 15rpx 20rpx;
-  background: #fef0f0;
+  /* background: #fef0f0; */
   border-radius: 5rpx;
-
+} 
+.none {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: 30%;
+  color: #333;
+}
+.blues {
+  font-size: 34rpx;
+  padding: 8rpx 16rpx;
+  border: solid 1px #cae4ff;
+  color: #409eff;
+  background: #ecf5ff;
+}
+.pinks {
+  font-size: 34rpx;
+  padding: 8rpx 16rpx;
+  border: solid 1px #fef0f0;
+  color: #f56c6c;
+  background: #fef0f0;
+}
+.grays {
+  font-size: 34rpx;
+  padding: 8rpx 16rpx;
+  border: solid 1px #cae4ff;
+  color: red;
+  background: #ecf5ff;
 }
 </style>
