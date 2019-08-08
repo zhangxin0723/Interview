@@ -4,23 +4,35 @@
     <ul class="add_emil">
         <li>
             <span>面试地址:</span>
-            <span>北京八维学校的</span>
+            <span>{{address}}</span>
         </li>
         <li>
             <span>面试时间:</span>
-            <span>2019-08-06 17：00</span>
+            <span>{{startTime}}</span>
         </li>
         <li>
             <span>联系方式:</span>
-            <span>18701083253</span>
+            <span>{{phone}}</span>
         </li>
         <li>
             <span>是否提醒:</span>
-            <span>未提醒</span>
+            <span>{{name}}</span>
         </li>
         <li>
             <span>面试状态:</span>
-            <span>已放弃</span>
+            <span>{{remind}}</span>
+        </li>
+        <li class="statu_remind" v-if='this.status_Id===-1&&ok'>
+           <div class="status_remind">
+                <div class="status_cancel">
+                    <span>取消提醒:</span>
+                    <switch bindchange="changeTap"></switch>
+                </div>
+                <div class="button">
+                    <button>去打卡</button>
+                    <button>放弃面试</button>
+                </div>
+           </div>
         </li>
     </ul>
   </div>
@@ -34,9 +46,29 @@ export default {
   components: {
     card
   },
-
- 
-
+  data:{
+    address:null,
+    name:null,
+    phone:null,
+    remind:null,
+    startTime:null,
+    status_Id:0,
+    ok:false,
+    blean:true
+  },
+    onLoad: function (option){
+        var that=this
+        this.address=option.address
+        this.name=option.name
+        this.phone=option.phone
+        this.remind=option.remind
+        this.startTime=option.startTime
+        this.status_Id=option.statusIId
+       console.log(this.status_Id,'90')
+    },
+   changeTap:function(e){
+       console.log(e)
+   }
 
 }
 </script>
@@ -89,5 +121,44 @@ export default {
 }
 .add_emil li span:last-of-type{
     flex:1;
+}
+.add_emil .statu_remind,.add_emil .status_remind{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+}
+.add_emil .status_remind{
+    padding:15px 0;
+}
+.add_emil .statu_remind .status_remind .button{
+     display:flex;
+     justify-content: center;
+     align-items: center;
+     margin-top:5%;
+}
+.add_emil .statu_remind .status_remind .button button{
+    display:inline-block;
+    width:310rpx;
+    height: 94rpx;
+    line-height: 94rpx;
+    text-align: center;
+    color: #fff;
+    margin-top: 21rpx;
+    border-radius: 0;
+   
+}
+.add_emil .statu_remind .status_remind .status_cancel{
+    margin-top: -36rpx;
+    border-bottom: 2rpx solid #eeeeee;
+    padding-bottom: 19rpx;
+}
+.add_emil .statu_remind .status_remind .button button:first-of-type{
+    background:#197dbf;
+}
+.add_emil .statu_remind .status_remind .button button:last-of-type{
+    background:#dc4e42;
+}
+.add_emil li:last-of-type{
+    border:0
 }
 </style>

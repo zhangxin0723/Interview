@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-08 20:10:01
- * @LastEditTime: 2019-08-09 07:44:50
+ * @LastEditTime: 2019-08-09 07:51:01
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -83,16 +83,23 @@ export default {
   },
   methods: {
     ...mapActions({
-      sign: "interview/getLocation"
+      sign: 'interview/getLocation',
+      signCont:'interview/getLocation'
     }),
-    goDetail: () => {
-      const url = "../detail/main";
-      mpvue.navigateTo({ url });
-    },
     clockId: function(index, status) {
-      console.log(status)
       this.colorId = index;
       this.sign({ status });
+    },
+    detil:function(item){
+      //address.address 地址
+      //.start_time 时间
+      //phone//手机号
+      //name/提醒
+      //remind放弃
+      //跳转详情
+      wx.navigateTo({
+        url: '/pages/information/main?address=' + item.address.address + '&startTime=' + item.start_time+'&phone='+item.phone+'&name='+item.name+'&remind='+item.remind+'&statusIId='+this.status_Id
+      })
     }
   },
   created() {

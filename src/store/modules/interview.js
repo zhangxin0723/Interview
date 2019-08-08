@@ -1,3 +1,10 @@
+/*
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-08-09 07:46:54
+ * @LastEditTime: 2019-08-09 07:51:46
+ * @LastEditors: Please set LastEditors
+ */
 import { sign, addSign } from '@/service'
 
 const moment = require('moment')
