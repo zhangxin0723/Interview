@@ -1,10 +1,17 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-08-08 20:10:01
+ * @LastEditTime: 2019-08-09 07:44:50
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
   <div class="Interview">
     <ul class="carded">
       <li
         v-for="(item,index) in data"
         :key="index"
-        @click="clockId(index,colorId=0,whole,item.status)"
+        @click="clockId(index,item.status)"
         :class="{active:colorId==index}"
       >
         <span>{{item.name}}</span>
@@ -53,8 +60,6 @@ export default {
         }
       ],
       colorId: 0,
-      whole: false,
-      address: null
     };
   },
   computed: {
@@ -84,13 +89,15 @@ export default {
       const url = "../detail/main";
       mpvue.navigateTo({ url });
     },
-    clockId: function(index, colorId, whole, status) {
+    clockId: function(index, status) {
+      console.log(status)
       this.colorId = index;
-      this.viewList.splice(0);
       this.sign({ status });
     }
   },
-  created() {}
+  created() {
+    this.sign({ status: -1 })
+  }
 };
 </script>
 
