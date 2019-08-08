@@ -8,7 +8,9 @@
       </li>
       <li></li>
     </ol>
-    <div class="center"></div>
+    <div class="center">
+        
+    </div>
     <ol class="footer">
         <li>
             <input type="text"/>
