@@ -7,7 +7,8 @@ const qqMapSdk = new QQMapWX({
 
 const state = {
   addressData: [],
-  checkAddress: '请选择面试地址'
+  checkAddress: '请选择面试地址',
+  checkAddressLocation: {}
 }
 
 const mutations = {
@@ -15,7 +16,8 @@ const mutations = {
     state.addressData = payload
   },
   checkAddress (state, payload) {
-    state.checkAddress = payload
+    state.checkAddress = payload.address
+    state.checkAddressLocation = payload.location
   }
 }
 

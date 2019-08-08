@@ -1,14 +1,11 @@
 {
   "pages": [
-<<<<<<< HEAD
-    "pages/home/main",
-=======
->>>>>>> houfaxing
     "pages/interview/main",
+    
     "pages/home/main",
+    "pages/AddInterview/main",
     "pages/logs/main",
     "pages/personal/main",
-    "pages/AddInterview/main",
     "pages/Address/main",
     "pages/InterviewState/main",
     "pages/InterviewDetail/main",

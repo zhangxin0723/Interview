@@ -20,7 +20,7 @@
 <script>
 import { mapActions , mapState , mapMutations} from 'vuex'
 import "../../../font/iconfont.css"
-import  throttle from  "@/utils/debounce"
+import { throttle } from "@/utils/debounce"
 export default {
   props:{
     
@@ -47,21 +47,21 @@ export default {
     }),
     //搜索地址
     search(){
-      throttle(()=>{this.getSuggestion(this.city)},2000)
+      this.getSuggestion(this.city)
     },
     //确认地址
     checkAdd(item){
       wx.navigateBack({
         delta: 1
       })
-      this.checkAddress(item.address)
+      this.checkAddress(item)
     }
   },
   created(){
     
   },
   mounted(){
-
+    this.getSuggestion=throttle(this.getSuggestion,2000)
   }
 }
 </script>

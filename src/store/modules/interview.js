@@ -1,7 +1,7 @@
-import {sign} from '@/service'
+import { sign, addSign } from '@/service'
 // 模块所有的状态
 const state = {
-   viewList:[]
+   viewList: [],
   }
   
   
@@ -9,7 +9,6 @@ const state = {
   const mutations = {
     updateSign(state, payload){
       state.viewList = payload;
-      
       }
   }
 

@@ -10,9 +10,9 @@
     <div class="emil">
       <ul>
          <li class="icon iconfont"  @click="location">&#xe63b;</li>
-          <li class="icon iconfont"  @click="handMy">&#xe678;</li>
+         <li class="icon iconfont"  @click="handMy">&#xe678;</li>
       </ul>
-      <p @click="Interview">添加面试</p>
+      <p @click="toAdd">添加面试</p>
     </div>
   </div>
 </template>
@@ -38,19 +38,16 @@ export default {
     }),
     handMy:e=> {
       wx.navigateTo({
-        url: "/pages/logs/main"
-         
+        url: "/pages/logs/main" 
       })
-       
     },
-    //添加面试
-   Interview :e=> {
+    //跳转添加面试
+    toAdd(){
       wx.navigateTo({
-        url: "/pages/AddInterview/main"
-         
+        url: "/pages/AddInterview/main" 
       })
-       
-    },
+    }
+   
   },
 
   created() {
@@ -95,16 +92,15 @@ map {
 
 }
 .emil ul li:last-of-type {
-    width: 80rpx;
-    height: 80rpx;
-    text-align: center;
-    line-height: 80rpx;
-    text-align: right;
-    padding-right: 15rpx;
-    font-weight: 800;
+    width: 100rpx;
+    height: 90rpx;
+    line-height: 100rpx;
     background: #000;
     border-radius: 50%;
-    margin-right: 28rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 25rpx;
 
 
 }
