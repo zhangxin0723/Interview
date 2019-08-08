@@ -5,7 +5,7 @@
  * @param mustRun
  * @returns {Function}
  */
-const throttle = function() {
+const throttle = function () {
   let timer = null
   return function (func, delay) {
     clearTimeout(timer)

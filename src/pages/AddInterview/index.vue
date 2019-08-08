@@ -27,11 +27,10 @@
       <label for>
         <span>面试地址：</span>
         <p @click="toAddress">{{checkAddress}}</p>
-        <!-- <input type="text" placeholder="请选择面试地址" @click="toAddress" :value="this.checkAddress"/> -->
       </label>
     </form>
     <div class="title">备注信息</div>
-    <textarea name id cols="30" rows="10" class="comment" placeholder="备注信息（可选，100个字以内"></textarea>
+    <textarea name id cols="30" rows="10" class="comment" placeholder="备注信息（可选，100个字以内" v-model="description"></textarea>
     <button class="cure" @click="cure">确认</button>
   </div>
 </template>
@@ -44,18 +43,20 @@ export default {
     return {
       company: "",
       phone: "",
-       date: '2016-09-01'
+      date: new Date().toLocaleDateString().replace(/\//g,"-"),
+      description:""
     };
   },
   computed: {
     ...mapState({
-      checkAddress:state=>state.address.checkAddress
+      checkAddress:state=>state.address.checkAddress,
+      checkAddressLocation: state=>state.address.checkAddressLocation
     })
   },
   methods: {
     //确认
     cure(){
-      console.log(this.checkAddress)
+      console.log(this.checkAddressLocation)
       if(this.company===""&&this.phone===""){
         wx.showToast({
           title: '请完善您的面试信息！！',
@@ -64,7 +65,7 @@ export default {
         })
          return
       }
-      console.log(this.company,this.phone)
+      console.log(this.company,this.phone,this.description)
       let that= this;
       wx.showModal({
         title: '温馨提示',

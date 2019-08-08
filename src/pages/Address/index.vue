@@ -51,10 +51,11 @@ export default {
     },
     //确认地址
     checkAdd(item){
+      console.log(item)
       wx.navigateBack({
         delta: 1
       })
-      this.checkAddress(item.address)
+      this.checkAddress(item)
     }
   },
   created(){
