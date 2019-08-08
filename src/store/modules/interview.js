@@ -16,16 +16,28 @@ const state = {
   // 模块内的异步改变
   const actions = {
     async getLocation({commit},payload){
+      console.log(payload,'8989')
         const res = await sign(payload);
         res.data.map(item => {
           item.address = JSON.parse(item.address);
           item.start_time = new Date(Number(item.start_time)).toLocaleString();
-          if(parseInt(item.sign_time)-parseInt(item.create_time)<item.create_time){
-              item.name='未提醒',
+          
+          if(payload.status===0){
+              item.name='已打卡',
+              item.remind=''
+          }else if(payload.status===1){
+             console.log(item.start_time)
+            if(parseInt(item.sign_time)-parseInt(item.create_time)>parseInt(item.create_time)){
+              item.name='已提醒',
               item.remind='已放弃'
-          }else{
-            item.name='已提醒',
-            item.remind=''
+            }else{
+              item.name='已提醒',
+              item.remind='已放弃'
+            }
+            
+          }else if(payload.status===-1){
+            item.name='未提醒',
+            item.remind='未开始'
           }
       })
       if (payload.page === 1) {
@@ -33,7 +45,7 @@ const state = {
       } else {
           state.viewList = [...state.viewList, ...res.data];
       }
-       console.log(res.data,'888')
+      
     }
    }
   
