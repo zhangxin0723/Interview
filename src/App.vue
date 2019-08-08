@@ -1,6 +1,5 @@
 <script>
-import {login} from '@/service/';
-
+import { login } from '@/service/index';
 export default {
   created () {
     // 调用API从本地缓存中获取数据
@@ -12,13 +11,14 @@ export default {
      * 支付宝(蚂蚁)：mpvue === my, mpvuePlatform === 'my'
      */
 
-    
-    // 调用登陆接口
+    let openid = wx.getStorageSync('openid');
+     // 调用登陆接口
     wx.login({
-      success: async (res)=>{
+      success: async (res)=>{ 
         if (res.code) {
           //发起网络请求
           let data = await login(res.code);
+          wx.setStorageSync('openid', data.data.openid);
           // console.log('res...', data);
         } else {
           // console.log('登录失败！' + res.errMsg)
