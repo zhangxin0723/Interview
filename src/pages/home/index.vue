@@ -9,9 +9,10 @@
     ></map>
     <div class="emil">
       <ul>
-        <li class="icon iconfont icon-dizhiguanli"  @click="location"></li>
-        <li class="icon iconfont icon-wode" @click="handMy"></li>
+         <li class="icon iconfont"  @click="location">&#xe63b;</li>
+          <li class="icon iconfont"  @click="handMy">&#xe678;</li>
       </ul>
+      <p>添加面试</p>
     </div>
   </div>
 </template>
@@ -35,18 +36,14 @@ export default {
     ...mapActions({
       location: 'home/getLocation'
     }),
-    handMy() {
-      const url = "../logs/main";
-      if (mpvuePlatform === "wx") {
-        mpvue.switchTab({ url });
-      } else {
-        mpvue.navigateTo({ url });
-      }
+    handMy:e=> {
+      wx.navigateTo({
+        url: "/pages/logs/main"
+         
+      })
+       
     },
-    clickHandle(ev) {
-      console.log("clickHandle:", ev);
-      // throw {message: 'custom test'}
-    }
+   
   },
 
   created() {
@@ -67,13 +64,15 @@ map {
   width: 100%;
   height: 100px;
   left: 0;
-  top: 90%;
+  top: 73%;
 }
 .emil ul {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  line-height: 80px;
+
 }
 .emil ul li:first-of-type {
   font-size: 30px;
@@ -88,5 +87,14 @@ map {
   padding-right: 15px;
   color: #197dbf;
   font-weight: 800;
+}
+.emil >p{
+  width:100%;
+  height:80px;
+  background:#000;
+  line-height:60px;
+  text-align:center;
+  font-size:18px;
+  color:#fff;
 }
 </style>
