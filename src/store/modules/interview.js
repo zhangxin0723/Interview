@@ -1,4 +1,4 @@
-import {sign} from '@/service'
+import { sign, addSign } from '@/service'
 // 模块所有的状态
 const state = {
    viewList:[]
@@ -18,6 +18,11 @@ const state = {
     async getLocation({commit},payload){
         const res = await sign();
         commit("updateSign",res.data);
+    },
+    //添加面试
+    async addSign({ commit },payload){
+      console.log(payload)
+      // let res = await addSign(payload);
     }
    }
   

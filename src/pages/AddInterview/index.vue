@@ -1,7 +1,7 @@
 <template>
-  <div class="addInterview">
+  <form class="addInterview"  @submit="submit" report-submit>
     <div class="title">面试信息</div>
-    <form action>
+    <div>
       <label for>
         <span>公司名称：</span>
         <input type="text" placeholder="请输入公司名称" v-model="company"/>
@@ -28,14 +28,14 @@
         <span>面试地址：</span>
         <p @click="toAddress">{{checkAddress}}</p>
       </label>
-    </form>
+    </div>
     <div class="title">备注信息</div>
     <textarea name id cols="30" rows="10" class="comment" placeholder="备注信息（可选，100个字以内" v-model="description"></textarea>
-    <button class="cure" @click="cure">确认</button>
-  </div>
+    <button class="cure"  form-type="submit">确认</button>
+  </form>
 </template>
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 export default {
   props: {},
   components: {},
@@ -54,9 +54,12 @@ export default {
     })
   },
   methods: {
+    ...mapActions({
+      addSign: 'interview/addSign'
+    }),
     //确认
-    cure(){
-      console.log(this.checkAddressLocation)
+    submit(e){
+      console.log(e.target)
       if(this.company===""&&this.phone===""){
         wx.showToast({
           title: '请完善您的面试信息！！',
@@ -65,16 +68,23 @@ export default {
         })
          return
       }
+      if (!/^1(3|4|5|7|8)\d{9}$/.test(this.phone) || !/^(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,14}$/.test(this.phone)){
+        wx.showToast({
+          title: '请填写正确的手机号！',
+          icon: 'none',
+          duration: 2000
+        })
+        return 
+      }
       console.log(this.company,this.phone,this.description)
       let that= this;
       wx.showModal({
         title: '温馨提示',
-        content: '添加面试成功！',
+        content: '确定添加面试吗？',
         success (res) {
           if (res.confirm) {
-            console.log('用户点击确定',that.company)
-          } else if (res.cancel) {
-            console.log('用户点击取消')
+            console.log('用户点击确定',that.addSign)
+            that.addSign("123-------------")
           }
         }
       })
@@ -97,9 +107,9 @@ export default {
       })
     },
     //日期
-     bindDateChange: function(e) {
+     bindDateChange(e) {
       this.date= e.mp.detail.value
-    }
+    },
   },
   created() {},
   mounted() {}
@@ -116,7 +126,6 @@ export default {
 form {
   display: inline-block;
   width: 100%;
-  padding-left: 40rpx;
 }
 label {
   width: 100%;
@@ -124,6 +133,7 @@ label {
   display: flex;
   align-items: center;
   border-bottom: 1rpx solid #eee;
+  padding-left: 40rpx;
 }
 label span {
   width: 22%;
