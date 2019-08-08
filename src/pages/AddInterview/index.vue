@@ -12,12 +12,22 @@
       </label>
       <label for>
         <span>面试时间：</span>
-        <input type="text" placeholder="2019-08-06 17:00" />
-        <i class="icon">!</i>
+        <!-- <input type="text" placeholder="2019-08-06 17:00" /> -->
+        <p>
+          <view class="section">
+            <picker mode="date" value="date" start="2015-09-01" end="2020-09-01" @change="bindDateChange">
+              <view class="picker">
+                {{date}}
+              </view>
+            </picker>
+          </view>
+        </p>
+        <i class="icon" @click="toast">!</i>
       </label>
       <label for>
         <span>面试地址：</span>
-        <input type="text" placeholder="请选择面试地址" />
+        <p @click="toAddress">{{checkAddress}}</p>
+        <!-- <input type="text" placeholder="请选择面试地址" @click="toAddress" :value="this.checkAddress"/> -->
       </label>
     </form>
     <div class="title">备注信息</div>
@@ -26,23 +36,39 @@
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 export default {
   props: {},
   components: {},
   data() {
     return {
       company: "",
-      phone: ""
+      phone: "",
+       date: '2016-09-01'
     };
   },
-  computed: {},
+  computed: {
+    ...mapState({
+      checkAddress:state=>state.address.checkAddress
+    })
+  },
   methods: {
+    //确认
     cure(){
+      console.log(this.checkAddress)
+      if(this.company===""&&this.phone===""){
+        wx.showToast({
+          title: '请完善您的面试信息！！',
+          icon: 'none',
+          duration: 2000
+        })
+         return
+      }
       console.log(this.company,this.phone)
       let that= this;
       wx.showModal({
-        title: '提示',
-        content: '这是一个模态弹窗',
+        title: '温馨提示',
+        content: '添加面试成功！',
         success (res) {
           if (res.confirm) {
             console.log('用户点击确定',that.company)
@@ -51,6 +77,27 @@ export default {
           }
         }
       })
+    },
+    //提示
+    toast(){
+      wx.showToast({
+        title: '我们会在提前一个小时通知您！',
+        icon: 'none',
+        duration: 2000
+      })
+    },
+    //跳转
+    toAddress(){
+      wx.navigateTo({
+          url:"/pages/Address/main",
+          success(res) {
+              console.log(res,'res...')
+          }
+      })
+    },
+    //日期
+     bindDateChange: function(e) {
+      this.date= e.mp.detail.value
     }
   },
   created() {},
@@ -81,10 +128,17 @@ label span {
   width: 22%;
   text-align: center;
   color: #9b9b9b;
+  font-size: 32rpx
 }
 label input {
   height: 100%;
-  padding-left: 30rpx;
+  padding-left: 20rpx;
+}
+label p {
+  flex: 1;
+  height: 100%;
+  line-height: 100rpx;
+  padding-left: 20rpx;
 }
 label:nth-last-child(1) {
   border-bottom: none;
@@ -98,7 +152,7 @@ label:nth-last-child(1) {
   text-align: center;
   line-height: 50rpx;
   color: #fff;
-  margin-left: 90rpx;
+  margin-right: 90rpx;
 }
 .cure {
   width: 100%;

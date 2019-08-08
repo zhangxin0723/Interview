@@ -4,7 +4,7 @@
     <ul class="add_emil">
         <li>
             <span>面试地址:</span>
-            <span>北京八维学校</span>
+            <span>北京八维学校的</span>
         </li>
         <li>
             <span>面试时间:</span>
