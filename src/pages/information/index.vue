@@ -1,9 +1,6 @@
 <template>
   <div class="information">
-    <div class="nav">
-      <span>＜</span>
-      <span>八位研究学院</span>
-    </div>
+    
     <ul class="add_emil">
         <li>
             <span>面试地址:</span>
