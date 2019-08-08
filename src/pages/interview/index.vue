@@ -1,23 +1,17 @@
 <template>
   <div class="Interview">
-    <div class="nav">
-      <span>＜</span>
-      <span>面试列表</span>
-      <span></span>
-    </div>
+   
     <ul class="carded">
-      <li class="active">未开始</li>
-      <li>已打卡</li>
-      <li>已放弃</li>
-      <li>全部</li>
-    </ul>
+      <li v-for="(item,index) in data" :key=index @click="clockId(index,colorId=0,whole)" :class = "{active:colorId==index}"> {{item}} </li>
+   </ul>
     <div class="footer">
-      <ul>
-         <li>北京八维研究学院</li>
-         <li>北京海淀上地软件园87号</li>
+    
+      <ul v-for="(item,index) in viewList" :key=index>
+         <li>{{item.company}}</li>
+         <li>{{item.address?item.address:item.address.address}}</li>
          <li>
            <span>面试时间:2019-08-06 17:00</span>
-           <span>为提醒</span>
+           <span>{{item.create_time-start_time>start_time?'未提醒':'提醒'}}</span>
          </li>
       </ul>
     </div>
@@ -27,16 +21,39 @@
 <script>
 import { formatTime } from '@/utils/index'
 import card from '@/components/card'
-
+import {sing} from '@/service/user.js'
+import {mapState, mapActions} from 'vuex';
 export default {
-  components: {
-    card
+  data() {
+    return {
+        data:["未开始","已打卡","已放弃","全部"],
+        colorId:0,
+        whole:false
+    };
   },
-
- 
-
-
-}
+  computed: {
+     ...mapState({
+      viewList: state=>state.interview.viewList,
+    })
+  },
+  methods: {
+      ...mapActions({
+      sign: 'interview/getLocation'
+    }),
+  goDetail:()=>{
+      const url = '../detail/main'
+       mpvue.navigateTo({url})
+   },
+   clockId:function(index,colorId,whole){
+        this.colorId = index;
+        console.log(whole)
+   }
+  },
+  created() {
+   this.sign()
+  
+  }
+};
 </script>
 
 <style  scoped>
@@ -47,25 +64,7 @@ export default {
    flex-direction:column;
    background:#eeeeee;
 }
-.nav{
-  width:100%;
-  height:30px;
-  display:flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding:10px;
-  background:#fff;
-  border-bottom:1px solid #eeeeee;
-  padding:10px;
-}
-.nav span{
-    font-size:20px;
-    padding:10px 0;
-    color:#666666;
-}
-.nav span:nth-of-type(2){
-  margin-left:10px;
-}
+
 .carded{
   display:flex;
   justify-content: space-between;
