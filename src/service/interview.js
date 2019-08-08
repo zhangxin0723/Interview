@@ -3,3 +3,6 @@ import fly from '@/utils/request'
 export let sign = (params) => {
   return fly.get('/sign',params)
 }
+export let signCont = () => {
+  return fly.get('/sign')
+}

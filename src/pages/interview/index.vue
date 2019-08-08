@@ -4,7 +4,7 @@
       <li v-for="(item,index) in data" :key=index @click="clockId(index,colorId=0,whole,item.status)" :class = "{active:colorId==index}"> {{item.name}} </li>
    </ul>
     <div class="footer">
-      <ul v-for="(item,index) in viewList" :key=index >
+      <ul v-for="(item,index) in viewList" :key=index @click="detil">
          <li>{{item.company}}</li>
          <li>{{item.address.address}}</li>
          <li>
@@ -18,9 +18,8 @@
 </template>
 
 <script>
-import { formatTime } from '@/utils/index'
 import card from '@/components/card'
-import {sing} from '@/service/interview.js'
+import {sing,signCont} from '@/service/interview.js'
 import {mapState, mapActions} from 'vuex';
 export default {
   data() {
@@ -44,17 +43,16 @@ export default {
     };
   },
   computed: {
-     
      ...mapState({
       viewList: state=>state.interview.viewList,
+      list: state=>state.list.list,
     }),
     
   },
   methods: {
-   
-      ...mapActions({
+   ...mapActions({
       sign: 'interview/getLocation',
-      
+      signCont:'interview/getLocation'
     }),
     
   goDetail:()=>{
@@ -63,8 +61,11 @@ export default {
    },
    clockId:function(index,colorId,whole,status){
         this.colorId = index;
-          this.viewList.splice(0)
+        this.viewList.splice(0)
         this.sign({status:status})
+        if(status===2){
+             this.list()
+        }
    }
   },
   created() {
@@ -120,6 +121,8 @@ export default {
   font-size:16px;
   color:#999999;
   margin:10px 0;
+  width: 74%;
+
 }
 .footer ul li:last-of-type{
  display:flex;
@@ -130,12 +133,25 @@ export default {
   font-size:30rpx;
   color:#666666;
 }
+.footer ul li:last-of-type span:last-of-type{
+  margin-right:2%;
+}
 .footer ul li:last-of-type span:last-of-type,.footer ul li:last-of-type span:nth-of-type(2){
-  font-size: 25rpx;
+  font-size: 28rpx;
   color: #f56c6c;
   padding: 15rpx 20rpx;
   background: #fef0f0;
   border-radius: 5rpx;
+}
+.footer ul li:last-of-type{
+  position:relative;
+}
+.footer ul li:last-of-type span:nth-of-type(2){
+    position: absolut;
+   margin-right: -42%;
 
+    margin-top: -30%;
+    background: #f4f6f9;
+    color:#909399;
 }
 </style>

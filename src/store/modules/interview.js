@@ -33,7 +33,6 @@ const state = {
       } else {
           state.viewList = [...state.viewList, ...res.data];
       }
-       console.log(res.data,'888')
     }
    }
   
