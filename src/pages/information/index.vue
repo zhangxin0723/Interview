@@ -34,8 +34,12 @@ export default {
   components: {
     card
   },
-
- 
+  created(option) {
+    console.log(this)
+  },
+    onLoad: function (option){
+       console.log(option,'999')
+    }
 
 
 }

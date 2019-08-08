@@ -4,7 +4,7 @@
       <li v-for="(item,index) in data" :key=index @click="clockId(index,colorId=0,whole,item.status)" :class = "{active:colorId==index}"> {{item.name}} </li>
    </ul>
     <div class="footer">
-      <ul v-for="(item,index) in viewList" :key=index @click="detil">
+      <ul v-for="(item,index) in viewList" :key=index @click="detil(item)">
          <li>{{item.company}}</li>
          <li>{{item.address.address}}</li>
          <li>
@@ -59,14 +59,25 @@ export default {
       const url = '../detail/main'
        mpvue.navigateTo({url})
    },
-   clockId:function(index,colorId,whole,status){
+   clockId:function(index,colorId,whole,status){//tab切换
         this.colorId = index;
         this.viewList.splice(0)
         this.sign({status:status})
         if(status===2){
              this.list()
         }
-   }
+    },
+    detil:function(item){
+      //address.address 地址
+      //.start_time 时间
+      //phone//手机号
+      //name/提醒
+      //remind放弃
+      //跳转详情
+      wx.navigateTo({
+      url: '/pages/information/main?address=' + item.address.address + '&startTime=' + item.start_time+'&phone'+item.phone+'&name'+item.name+'remind'+item.remind
+    })
+    }
   },
   created() {
   }
