@@ -9,7 +9,8 @@
          <li>{{item.address.address}}</li>
          <li>
            <span>面试时间:{{item.start_time}}</span>
-           <span>{{item.company}}</span>
+           <span>{{item.remind}}</span>
+           <span>{{item.name}}</span>
          </li>
       </ul>
     </div>
@@ -85,31 +86,32 @@ export default {
   justify-content: space-between;
   align-items: center;
   background:#fff;
-  padding:0 10px;
+  padding: 0 35rpx;
+
 }
 .carded li{
-  font-size:13px;
-  padding:10px 0;
+  font-size:30rpx;
+  padding:20rpx 0;
 }
 .active{
   color:#197dbf;
-  border-bottom:1px solid #197dbf;
+  border-bottom:1rpx solid #197dbf;
 }
 .footer{
    flex:1;
    display:flex;
    flex-direction: column;
    background:#fff;
-   margin-top:10px;
+   margin-top:10rpx;
    overflow-y: auto;
 }
 .footer ul{
   display:flex;
   flex-direction:column;
-  padding:10px;
+  padding:20rpx;
 }
 .footer ul li{
-  font-size:20px;
+  font-size:40rpx;
 }
 .footer ul li:first-of-type{
   color:#000000;
@@ -125,14 +127,15 @@ export default {
  align-items: center;
 }
 .footer ul li:last-of-type span:first-of-type{
-  font-size:20px;
+  font-size:30rpx;
   color:#666666;
 }
 .footer ul li:last-of-type span:last-of-type{
-  font-size:15px;
-  color:#f56c6c;
-  padding:4px 10px;
-  background:#fef0f0;
-  border-radius:5px;
+  font-size: 25rpx;
+  color: #f56c6c;
+  padding: 15rpx 20rpx;
+  background: #fef0f0;
+  border-radius: 5rpx;
+
 }
 </style>

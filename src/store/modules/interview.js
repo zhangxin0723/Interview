@@ -20,6 +20,13 @@ const state = {
         res.data.map(item => {
           item.address = JSON.parse(item.address);
           item.start_time = new Date(Number(item.start_time)).toLocaleString();
+          if(parseInt(item.sign_time)-parseInt(item.create_time)<item.create_time){
+              item.name='未提醒',
+              item.remind='已放弃'
+          }else{
+            item.name='已提醒',
+            item.remind=''
+          }
       })
       if (payload.page === 1) {
           state.viewList = res.data
