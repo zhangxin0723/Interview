@@ -10,7 +10,7 @@
     <div class="emil">
       <ul>
          <li class="icon iconfont"  @click="location">&#xe63b;</li>
-          <li class="icon iconfont"  @click="handMy">&#xe678;</li>
+         <li class="icon iconfont"  @click="handMy">&#xe678;</li>
       </ul>
       <p @click="toAdd">添加面试</p>
     </div>
@@ -28,7 +28,7 @@ export default {
   computed: {
     ...mapState({
       longitude: state=>state.home.longitude,
-      latitude: state=>state.home.latitude,
+      latitude: state=>state.home.latitude
     })
   },
   
@@ -57,6 +57,7 @@ export default {
 </script>
 
 <style scoped>
+@import "../../font/iconfont.css";
 page,
 view,
 map {
@@ -64,11 +65,12 @@ map {
   height: 100%;
 }
 .emil {
-  position: absolute;
+  position: fixed;
   width: 100%;
-  height: 100px;
+  height: 143rpx;
   left: 0;
-  top: 73%;
+  bottom: 9%;
+
 }
 .emil ul {
   width: 100%;
@@ -78,27 +80,38 @@ map {
   line-height: 80px;
 
 }
-.emil ul li:first-of-type {
-  font-size: 30px;
-  text-align: left;
-  padding-left: 15px;
+.emil ul li{
+  font-size: 56rpx;
   color: #197dbf;
+}
+.emil ul li:first-of-type {
+  text-align: left;
+  padding-left: 28rpx;
   font-weight: 800;
+  font-size: 66rpx;
+
 }
 .emil ul li:last-of-type {
-  font-size: 30px;
-  text-align: right;
-  padding-right: 15px;
-  color: #197dbf;
-  font-weight: 800;
+    width: 100rpx;
+    height: 90rpx;
+    line-height: 100rpx;
+    background: #000;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 25rpx;
+
+
 }
 .emil >p{
-  width:100%;
-  height:80px;
-  background:#000;
-  line-height:60px;
-  text-align:center;
-  font-size:18px;
-  color:#fff;
+  width: 100%;
+  height: 106rpx;
+  background: #000;
+  line-height: 106rpx;
+  text-align: center;
+  font-size: 37rpx;
+  color: #fff;
+
 }
 </style>
