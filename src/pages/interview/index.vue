@@ -39,8 +39,8 @@ export default {
             }],
         colorId:0,
         whole:false,
-        address:null,
-    };
+        status_Id:0,
+    }
   },
   computed: {
      ...mapState({
@@ -61,11 +61,12 @@ export default {
    },
    clockId:function(index,colorId,whole,status){//tab切换
         this.colorId = index;
-        this.viewList.splice(0)
+        this.viewList.splice(0);
         this.sign({status:status})
         if(status===2){
              this.list()
         }
+        this.status_Id=status
     },
     detil:function(item){
       //address.address 地址
@@ -75,7 +76,7 @@ export default {
       //remind放弃
       //跳转详情
       wx.navigateTo({
-      url: '/pages/information/main?address=' + item.address.address + '&startTime=' + item.start_time+'&phone'+item.phone+'&name'+item.name+'remind'+item.remind
+      url: '/pages/information/main?address=' + item.address.address + '&startTime=' + item.start_time+'&phone='+item.phone+'&name='+item.name+'&remind='+item.remind+'&statusIId='+this.status_Id
     })
     }
   },
@@ -159,8 +160,7 @@ export default {
 }
 .footer ul li:last-of-type span:nth-of-type(2){
     position: absolut;
-   margin-right: -42%;
-
+    margin-right: -39%;
     margin-top: -30%;
     background: #f4f6f9;
     color:#909399;

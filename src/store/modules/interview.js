@@ -16,6 +16,7 @@ const state = {
   // 模块内的异步改变
   const actions = {
     async getLocation({commit},payload){
+      console.log(payload,'8989')
         const res = await sign(payload);
         res.data.map(item => {
           item.address = JSON.parse(item.address);
@@ -23,9 +24,12 @@ const state = {
           if(parseInt(item.sign_time)-parseInt(item.create_time)<item.create_time){
               item.name='未提醒',
               item.remind='已放弃'
-          }else{
+          }else if(parseInt(item.sign_time)-parseInt(item.create_time)>item.create_time){
             item.name='已提醒',
             item.remind=''
+          }else if(payload.status===-1){
+            item.name='未提醒',
+            item.remind='未开始'
           }
       })
       if (payload.page === 1) {
