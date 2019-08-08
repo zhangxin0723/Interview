@@ -22,7 +22,7 @@
             <span>面试状态:</span>
             <span>{{remind}}</span>
         </li>
-        <li class="statu_remind" v-if='this.status_Id===-1?ok:blean'>
+        <li class="statu_remind" v-if='this.status_Id===-1&&ok'>
            <div class="status_remind">
                 <div class="status_cancel">
                     <span>取消提醒:</span>

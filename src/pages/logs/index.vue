@@ -6,7 +6,7 @@
        <li>187****3253</li>
      </ul>
      <div class="footer">
-       <ol>
+       <ol  @click="inte">
          <li>
            <span>!</span>
            <span>我的面试</span>
@@ -34,12 +34,17 @@ export default {
   },
   methods: {
     service:e=> {
+      //客服
       wx.navigateTo({
         url: "/pages/customer/main"
       })
       
     },
-   
+    inte:e=>{
+      wx.navigateTo({
+          url: "/pages/interview/main"
+     })
+   }
   },
  
 
