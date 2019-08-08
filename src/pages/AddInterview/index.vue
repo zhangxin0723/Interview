@@ -15,10 +15,13 @@
         <!-- <input type="text" placeholder="2019-08-06 17:00" /> -->
         <p>
           <view class="section">
-            <picker mode="date" value="date" start="2015-09-01" end="2020-09-01" @change="bindDateChange">
-              <view class="picker">
-                {{date}}
-              </view>
+            <picker
+              mode="multiSelector"
+              :range="dateRange"
+              :value="info.date"
+              @change="dateChange"
+              @columnchange="columnChange"
+            ><view class="date">{{dateShow}}</view>
             </picker>
           </view>
         </p>
@@ -31,11 +34,19 @@
     </div>
     <div class="title">备注信息</div>
     <textarea name id cols="30" rows="10" class="comment" placeholder="备注信息（可选，100个字以内" v-model="description"></textarea>
-    <button class="cure"  form-type="submit">确认</button>
+    <button class="cure" form-type="submit">确认</button>
   </form>
 </template>
 <script>
 import { mapState, mapActions } from 'vuex'
+const moment = require('moment')
+
+const range = [
+  [0,1,2,3,4,5,6,7,8,9],
+  [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],
+  ['00分','10分','20分','30分','40分','50分']
+];
+
 export default {
   props: {},
   components: {},
@@ -44,14 +55,46 @@ export default {
       company: "",
       phone: "",
       date: new Date().toLocaleDateString().replace(/\//g,"-"),
-      description:""
+      description:"",
+      info: {
+        date: [0,0,0],
+      }
     };
   },
   computed: {
     ...mapState({
       checkAddress:state=>state.address.checkAddress,
-      checkAddressLocation: state=>state.address.checkAddressLocation
-    })
+      checkAddressLocation: state=>state.address.checkAddressLocation,
+    }),
+    // 处理面试日期
+    dateRange(){
+      let dateRange = [...range];
+      // 如果时间是今天，过滤掉现在之前的小时
+      if (!this.info.date[0]){
+        dateRange[1] = dateRange[1].filter(item=>{
+          return item>moment().hour();
+        })
+      }else{
+        dateRange[1] = range[1]
+      }
+      // 格式化小时
+      dateRange[1] = dateRange[1].map(item=>{
+        return item+'点'
+      })
+      // 计算当前日期之后的十天
+      dateRange[0] = dateRange[0].map(item=>{
+        return moment().add(item, 'days').date()+'号'
+      })
+      return dateRange;
+    },
+    // 显示的日期
+    dateShow(){
+      return moment()
+      .add(moment().hour()==23?this.info.date[0]-1:this.info.date[0], 'd')
+      .add(this.info.date[1]+1, 'h')
+      .minute(this.info.date[2]*10)
+      .format('YYYY-MM-DD HH:mm');
+    }
   },
   methods: {
     ...mapActions({
@@ -59,7 +102,6 @@ export default {
     }),
     //确认
     submit(e){
-      console.log(e.target)
       if(this.company===""&&this.phone===""){
         wx.showToast({
           title: '请完善您的面试信息！！',
@@ -76,15 +118,23 @@ export default {
         })
         return 
       }
-      console.log(this.company,this.phone,this.description)
+      let obj={
+        company: this.company,
+        phone: this.phone,
+        form_id: e.target.formId,
+        address: this.checkAddress,
+        latitude: this.checkAddressLocation.lat,
+        longitude: this.checkAddressLocation.lng,
+        start_time: new Date(this.dateShow).getTime(),
+        description: this.description
+      }
       let that= this;
       wx.showModal({
         title: '温馨提示',
         content: '确定添加面试吗？',
         success (res) {
           if (res.confirm) {
-            console.log('用户点击确定',that.addSign)
-            that.addSign("123-------------")
+            that.addSign(obj)
           }
         }
       })
@@ -101,18 +151,25 @@ export default {
     toAddress(){
       wx.navigateTo({
           url:"/pages/Address/main",
-          success(res) {
-              console.log(res,'res...')
-          }
       })
     },
-    //日期
-     bindDateChange(e) {
-      this.date= e.mp.detail.value
+    // 监听多列选择器每列变化
+    columnChange(e){
+      let {column, value} = e.target;
+      let date = [...this.info.date];
+      date[column] = value;
+      this.info.date = date;
     },
   },
-  created() {},
-  mounted() {}
+  created() {
+    // 如果当前时间是十一点之后，过滤掉今天
+    if (moment().hour() == 23){
+      this.info.date = [1,0,0];
+    }
+  },
+  mounted() {
+    
+  }
 };
 </script>
 <style scoped lang="">
@@ -150,6 +207,10 @@ label p {
   height: 100%;
   line-height: 100rpx;
   padding-left: 20rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-right: 5%;
 }
 label:nth-last-child(1) {
   border-bottom: none;

@@ -51,7 +51,6 @@ export default {
     },
     //确认地址
     checkAdd(item){
-      console.log(item)
       wx.navigateBack({
         delta: 1
       })

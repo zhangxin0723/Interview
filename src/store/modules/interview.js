@@ -1,7 +1,7 @@
 import { sign, addSign } from '@/service'
 // 模块所有的状态
 const state = {
-   viewList:[]
+   viewList: [],
   }
   
   
@@ -9,8 +9,7 @@ const state = {
   const mutations = {
     updateSign(state, payload){
       state.viewList = payload;
-      console.log(payload)
-      }
+    }
   }
 
   // 模块内的异步改变
@@ -21,8 +20,14 @@ const state = {
     },
     //添加面试
     async addSign({ commit },payload){
-      console.log(payload)
-      // let res = await addSign(payload);
+      let res = await addSign(payload);
+      if(res.code===0){
+        wx.showToast({
+          title: res.msg,
+          icon: 'success',
+          duration: 2000
+        })
+      }
     }
    }
   

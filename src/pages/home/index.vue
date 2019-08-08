@@ -12,7 +12,7 @@
          <li class="icon iconfont"  @click="location">&#xe63b;</li>
           <li class="icon iconfont"  @click="handMy">&#xe678;</li>
       </ul>
-      <p>添加面试</p>
+      <p @click="toAdd">添加面试</p>
     </div>
   </div>
 </template>
@@ -38,11 +38,15 @@ export default {
     }),
     handMy:e=> {
       wx.navigateTo({
-        url: "/pages/logs/main"
-         
+        url: "/pages/logs/main" 
       })
-       
     },
+    //跳转添加面试
+    toAdd(){
+      wx.navigateTo({
+        url: "/pages/AddInterview/main" 
+      })
+    }
    
   },
 
