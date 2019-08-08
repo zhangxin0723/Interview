@@ -67,6 +67,7 @@ export default {
              this.list()
         }
         this.status_Id=status
+        
     },
     detil:function(item){
       //address.address 地址

@@ -22,7 +22,7 @@
             <span>面试状态:</span>
             <span>{{remind}}</span>
         </li>
-        <li class="statu_remind">
+        <li class="statu_remind" v-if='this.status_Id===-1?ok:blean'>
            <div class="status_remind">
                 <div class="status_cancel">
                     <span>取消提醒:</span>
@@ -52,7 +52,9 @@ export default {
     phone:null,
     remind:null,
     startTime:null,
-    status_Id:0
+    status_Id:0,
+    ok:false,
+    blean:true
   },
     onLoad: function (option){
         var that=this
@@ -62,7 +64,7 @@ export default {
         this.remind=option.remind
         this.startTime=option.startTime
         this.status_Id=option.statusIId
-       
+       console.log(this.status_Id,'90')
     },
    changeTap:function(e){
        console.log(e)
