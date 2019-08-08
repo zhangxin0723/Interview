@@ -130,7 +130,7 @@ export default {
   font-size:30rpx;
   color:#666666;
 }
-.footer ul li:last-of-type span:last-of-type{
+.footer ul li:last-of-type span:last-of-type,.footer ul li:last-of-type span:nth-of-type(2){
   font-size: 25rpx;
   color: #f56c6c;
   padding: 15rpx 20rpx;
