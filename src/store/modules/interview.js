@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-09 07:46:54
- * @LastEditTime: 2019-08-09 22:51:01
+ * @LastEditTime: 2019-08-10 07:55:16
  * @LastEditors: Please set LastEditors
  */
 import { sign, addSign, signDetail, updateSign } from '@/service'
@@ -29,11 +29,11 @@ const mutations = {
     });
     state.viewList = payload;
   },
-  upInterviewState( state, payload ){
+  upInterviewState(state, payload) {
     state.interviewState = payload
   },
   //面试详情数据
-  upSignDetail(state, payload){
+  upSignDetail(state, payload) {
     payload.start_time = formatTime(payload.start_time)
     state.signDetailData = payload
   }
@@ -43,23 +43,7 @@ const mutations = {
 const actions = {
   async getLocation({ commit }, payload) {
     const res = await sign(payload);
-    commit('updateSign',res.data)
-    // res.data.map(item => {
-    //   item.address = JSON.parse(item.address);
-    //   item.start_time = new Date(Number(item.start_time)).toLocaleString();
-    //   if (parseInt(item.sign_time) - parseInt(item.create_time) < item.create_time) {
-    //     item.name = '未提醒',
-    //       item.remind = '已放弃'
-    //   } else {
-    //     item.name = '已提醒',
-    //       item.remind = ''
-    //   }
-    // })
-    // if (payload.page === 1) {
-    //   state.viewList = res.data
-    // } else {
-    //   state.viewList = [...state.viewList, ...res.data];
-    // }
+    commit('updateSign', res.data)
   },
   //添加面试
   async addSign({ commit }, payload) {
@@ -76,18 +60,18 @@ const actions = {
     }
   },
   //获取面试详情
-  async signDetail({ commit }, payload){
+  async signDetail({ commit }, payload) {
     let res = await signDetail(payload)
     commit('upSignDetail', res.data)
   },
   //更新面试信息
-  async updateSign({ commit, dispatch}, payload){
+  async updateSign({ commit, dispatch }, payload) {
     let { id } = payload;
-    console.log(id,"++++++++++++++++++++")
+    console.log(id, "++++++++++++++++++++")
     let res = await updateSign(payload)
-    if(res.code===0){
-      console.log(res,"------------------------")
-       await dispatch('signDetail', {id})
+    if (res.code === 0) {
+      console.log(res, "------------------------")
+      await dispatch('signDetail', { id })
     }
   }
 }

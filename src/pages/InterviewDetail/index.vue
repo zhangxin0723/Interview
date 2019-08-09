@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-07 08:08:01
- * @LastEditTime: 2019-08-09 21:35:25
+ * @LastEditTime: 2019-08-10 07:55:38
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -30,7 +30,9 @@
       </label>
       <label for v-if="signDetailData.status !== 1">
         <span>取消提醒：</span>
-        <p><switch @change="switch1Change"/></p>
+        <p>
+          <switch @change="switch1Change" />
+        </p>
       </label>
     </form>
     <div class="choose" v-if="signDetailData.status !== 1">
@@ -40,7 +42,7 @@
   </div>
 </template>
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions } from "vuex";
 export default {
   props: {},
   components: {},
@@ -49,28 +51,28 @@ export default {
   },
   computed: {
     ...mapState({
-      signDetailData: state => state.interview.signDetailData,
+      signDetailData: state => state.interview.signDetailData
     }),
-    remind(){
-      let str='';
-      if(this.signDetailData.remind === -1){
-        str='未提醒'
-      }else{
-        str='已提醒'
+    remind() {
+      let str = "";
+      if (this.signDetailData.remind === -1) {
+        str = "未提醒";
+      } else {
+        str = "已提醒";
       }
-      return str
+      return str;
     },
-    status(){
-      let str='';
-      if(this.signDetailData.status === -1){
-        str = '未开始'
-      }else if(this.signDetailData.status === 0){
-        str = '已打卡'
-      }else{
-        str = '已放弃'
+    status() {
+      let str = "";
+      if (this.signDetailData.status === -1) {
+        str = "未开始";
+      } else if (this.signDetailData.status === 0) {
+        str = "已打卡";
+      } else {
+        str = "已放弃";
       }
-      return str
-    },
+      return str;
+    }
     // showFlag(){
     //   if(signDetailData.status !== 1){
     //     return  false
@@ -79,33 +81,33 @@ export default {
   },
   methods: {
     ...mapActions({
-      updateSign: 'interview/updateSign'
+      updateSign: "interview/updateSign"
     }),
-    switch1Change(e){
-      if(e.mp.detail.value){
-        this.updateSign({ id: this.signDetailData.id, remind: 1})
+    switch1Change(e) {
+      if (e.mp.detail.value) {
+        this.updateSign({ id: this.signDetailData.id, remind: 1 });
       }
     },
     //放弃面试
-    giveUp(){
+    giveUp() {
       let that = this;
-      console.log(this.signDetailData)
+      console.log(this.signDetailData);
       wx.showModal({
-            title: '温馨提示',
-            content: '确定要放弃面试吗？',
-            success (res) {
-            if (res.confirm) {
-                that.updateSign({ id: that.signDetailData.id, status: 1})
-                console.log('用户点击了确定')                
-            } else if (res.cancel) {
-                console.log('用户点击取消')
-            }
+        title: "温馨提示",
+        content: "确定要放弃面试吗？",
+        success(res) {
+          if (res.confirm) {
+            that.updateSign({ id: that.signDetailData.id, status: 1 });
+            console.log("用户点击了确定");
+          } else if (res.cancel) {
+            console.log("用户点击取消");
           }
-      })
+        }
+      });
     }
   },
   created() {},
-  mounted() {},
+  mounted() {}
 };
 </script>
 <style scoped lang="">
@@ -155,10 +157,10 @@ label p {
   color: #fff;
   border-radius: 0;
 }
-.choose button:nth-child(1){
+.choose button:nth-child(1) {
   background: #197dbf;
 }
-.choose button:nth-child(2){
+.choose button:nth-child(2) {
   background: #c30;
 }
 </style>
