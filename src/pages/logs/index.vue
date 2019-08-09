@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-09 07:54:01
- * @LastEditTime: 2019-08-09 16:11:18
+ * @LastEditTime: 2019-08-09 16:13:16
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -60,14 +60,12 @@ export default {
 </script>
 <style  scoped>
 @import "../../font/iconfont.css";
-
  .login{
    width:100%;
    height:100%;
    display:flex;
    flex-direction:column;
 }
-
 .header{
     width:100%;
     height:100px;
@@ -104,7 +102,6 @@ export default {
   flex-direction: column;
   padding:0 10px;
 }
-
 .footer ol{
   display:flex;
   justify-content: space-between;

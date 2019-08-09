@@ -2,10 +2,10 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-09 07:46:54
- * @LastEditTime: 2019-08-09 15:05:54
+ * @LastEditTime: 2019-08-09 20:07:35
  * @LastEditors: Please set LastEditors
  */
-import { sign, addSign, signDetail } from '@/service'
+import { sign, addSign, signDetail, updateSign } from '@/service'
 
 const moment = require('moment')
 function formatTime(start_time) {
@@ -79,6 +79,11 @@ const actions = {
   async signDetail({ commit }, payload){
     let res = await signDetail(payload)
     commit('upSignDetail', res.data)
+  },
+  //更新面试信息
+  async updateSign({ commit }, payload){
+    let res = await updateSign(payload)
+    console.log(payload,res)
   }
 }
 

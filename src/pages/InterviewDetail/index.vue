@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-07 08:08:01
- * @LastEditTime: 2019-08-09 11:00:14
+ * @LastEditTime: 2019-08-09 21:13:03
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -28,19 +28,19 @@
         <span>面试状态：</span>
         <p>{{status}}</p>
       </label>
-      <label for>
+      <label for v-if="signDetailData.status !== 1">
         <span>取消提醒：</span>
         <p><switch @change="switch1Change"/></p>
       </label>
     </form>
-    <div class="choose">
+    <div class="choose" v-if="signDetailData.status !== 1">
       <button>去打卡</button>
-      <button>放弃面试</button>
+      <button @click="giveUp">放弃面试</button>
     </div>
   </div>
 </template>
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 export default {
   props: {},
   components: {},
@@ -73,12 +73,34 @@ export default {
     }
   },
   methods: {
+    ...mapActions({
+      updateSign: 'interview/updateSign'
+    }),
     switch1Change(e){
-      console.log('switch1 发生 change 事件，携带值为', e.mp.detail.value)
+      if(e.mp.detail.value){
+        this.updateSign({ id: this.signDetailData.id, remind: 1})
+      }
     },
+    //放弃面试
+    giveUp(){
+      let that = this;
+      console.log(this.signDetailData)
+      wx.showModal({
+            title: '温馨提示',
+            content: '确定要放弃面试吗？',
+            success (res) {
+            if (res.confirm) {
+                that.updateSign({ id: that.signDetailData.id, status: 1})
+                console.log('用户点击了确定')                
+            } else if (res.cancel) {
+                console.log('用户点击取消')
+            }
+          }
+      })
+    }
   },
   created() {},
-  mounted() {}
+  mounted() {},
 };
 </script>
 <style scoped lang="">

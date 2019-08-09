@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-08 20:10:01
- * @LastEditTime: 2019-08-09 15:39:53
+ * @LastEditTime: 2019-08-09 17:06:30
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -22,6 +22,7 @@
       <p @click="toAdd">添加面试</p>
     </div>
     <button v-show='flag' class="authorization" open-type="getPhoneNumber" @getphonenumber="getPhoneNumber"></button>
+    <button class="setting" open-type="openSetting" @opensetting="callback" v-if="showFlag">打开设置页</button>
   </div>
 </template>
 
@@ -34,7 +35,7 @@ export default {
   },
   data(){
     return {
-      
+      showFlag:false
     }
   },
   computed: {
@@ -71,7 +72,16 @@ export default {
     getPhoneNumber (e) {
       // console.log(e.target,this.decrypt)
       let { encryptedData, iv } = e.target;
-      this.decrypt({ encryptedData, iv })
+      if(encryptedData){
+        this.decrypt({ encryptedData, iv })
+      } else {
+        this.showFlag = true
+        wx.openSetting({
+          success(res){
+            console.log(res.authSetting)
+          }
+        })
+      }
     }
   },
 
@@ -146,5 +156,12 @@ map,
   left: 0;
   z-index: 2;
   opacity: 0;
+}
+.setting{
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 3;
 }
 </style>

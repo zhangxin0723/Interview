@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-09 07:54:01
- * @LastEditTime: 2019-08-09 10:38:53
+ * @LastEditTime: 2019-08-09 20:07:26
  * @LastEditors: Please set LastEditors
  */
 import fly from '@/utils/request'
@@ -21,4 +21,10 @@ export let signCont = () => {
 //获取面试详情
 export let signDetail = params => {
   return fly.get(`/sign/${params}`, ) 
+}
+//更新面试
+export let updateSign = params => {
+  let { id } = params;
+  delete params.id
+  return fly.put(`/sign/${id}`, params)
 }
