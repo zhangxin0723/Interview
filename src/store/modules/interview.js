@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-09 07:46:54
- * @LastEditTime: 2019-08-09 10:49:52
+ * @LastEditTime: 2019-08-09 15:05:54
  * @LastEditors: Please set LastEditors
  */
 import { sign, addSign, signDetail } from '@/service'
@@ -27,16 +27,13 @@ const mutations = {
       item.start_time = formatTime(item.start_time)
       return item
     });
-    console.log(payload)
     state.viewList = payload;
   },
   upInterviewState( state, payload ){
-    // console.log('payload...',payload)
     state.interviewState = payload
   },
   //面试详情数据
   upSignDetail(state, payload){
-    console.log(payload)
     payload.start_time = formatTime(payload.start_time)
     state.signDetailData = payload
   }
@@ -46,7 +43,6 @@ const mutations = {
 const actions = {
   async getLocation({ commit }, payload) {
     const res = await sign(payload);
-    console.log(res.data);
     commit('updateSign',res.data)
     // res.data.map(item => {
     //   item.address = JSON.parse(item.address);

@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-08 20:10:01
- * @LastEditTime: 2019-08-09 11:45:17
+ * @LastEditTime: 2019-08-09 15:39:53
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -21,6 +21,7 @@
       </ul>
       <p @click="toAdd">添加面试</p>
     </div>
+    <button v-show='flag' class="authorization" open-type="getPhoneNumber" @getphonenumber="getPhoneNumber"></button>
   </div>
 </template>
 
@@ -31,17 +32,29 @@ export default {
   components: {
     
   },
-
+  data(){
+    return {
+      
+    }
+  },
   computed: {
     ...mapState({
-      longitude: state=>state.home.longitude,
-      latitude: state=>state.home.latitude
-    })
+      longitude: state => state.home.longitude,
+      latitude: state => state.home.latitude,
+      code: state => state.user.code,
+    }),
+    flag(){
+      if(this.code===0){
+        return false
+      }
+      return true
+    }
   },
   
   methods: {
     ...mapActions({
-      location: 'home/getLocation'
+      location: 'home/getLocation',
+      decrypt: 'user/decrypt'
     }),
     handMy:e=> {
       wx.navigateTo({
@@ -53,8 +66,13 @@ export default {
       wx.navigateTo({
         url: "/pages/AddInterview/main" 
       })
+    },
+    //获取手机
+    getPhoneNumber (e) {
+      // console.log(e.target,this.decrypt)
+      let { encryptedData, iv } = e.target;
+      this.decrypt({ encryptedData, iv })
     }
-   
   },
 
   created() {
@@ -67,7 +85,8 @@ export default {
 @import "../../font/iconfont.css";
 page,
 view,
-map {
+map,
+.wrap{
   width: 100%;
   height: 100%;
 }
@@ -77,6 +96,7 @@ map {
   height: 143rpx;
   left: 0;
   bottom: 8%;
+  z-index: 1;
 
 }
 .emil ul {
@@ -108,8 +128,6 @@ map {
     justify-content: center;
     align-items: center;
     margin-right: 25rpx;
-
-
 }
 .emil >p{
   width: 100%;
@@ -119,6 +137,14 @@ map {
   text-align: center;
   font-size: 37rpx;
   color: #fff;
-
+}
+.authorization{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  opacity: 0;
 }
 </style>

@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-08-08 20:10:01
+ * @LastEditTime: 2019-08-09 15:46:16
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
   <div class="login">
     <div class="nav">
@@ -7,7 +14,7 @@
     </div>
      <ul class="header">
        <li></li>
-       <li>187****3253</li>
+       <li>{{phone}}</li>
      </ul>
      <div class="footer">
        <ol>
@@ -29,14 +36,16 @@
 </template>
 
 <script>
-import { formatTime } from '@/utils/index'
-import card from '@/components/card'
-
+import { mapState } from 'vuex'
 export default {
   components: {
-    card
-  },
 
+  },
+  computed: {
+    ...mapState({
+      phone: state => state.user.phone,
+    }),
+  },
  
 
 

@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-08 20:10:01
- * @LastEditTime: 2019-08-09 10:42:02
+ * @LastEditTime: 2019-08-09 15:07:54
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -56,7 +56,7 @@ export default {
         },
         {
           name: "全部",
-          status: 2
+          status: null,
         }
       ],
       colorId: 0,
@@ -103,6 +103,9 @@ export default {
     }
   },
   created() {
+    
+  },
+  onShow(){
     this.sign({ status: -1 })
   }
 };
