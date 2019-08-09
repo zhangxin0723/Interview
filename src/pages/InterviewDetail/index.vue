@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-07 08:08:01
- * @LastEditTime: 2019-08-09 21:13:03
+ * @LastEditTime: 2019-08-09 21:35:25
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -70,7 +70,12 @@ export default {
         str = '已放弃'
       }
       return str
-    }
+    },
+    // showFlag(){
+    //   if(signDetailData.status !== 1){
+    //     return  false
+    //   }
+    // }
   },
   methods: {
     ...mapActions({
