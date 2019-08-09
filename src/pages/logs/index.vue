@@ -1,9 +1,15 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-08-09 07:54:01
+ * @LastEditTime: 2019-08-09 16:11:18
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
   <div class="login">
-    
      <ul class="header">
        <li class="icon iconfont">&#xe678;</li>
-       <li>187****3253</li>
+       <li>{{phone}}</li>
      </ul>
      <div class="footer">
        <ol  @click="inte">
@@ -25,12 +31,11 @@
 </template>
 
 <script>
-import { formatTime } from '@/utils/index'
-import card from '@/components/card'
+import { mapState } from 'vuex'
 
 export default {
   components: {
-    card
+    
   },
   methods: {
     service:e=> {
@@ -46,9 +51,11 @@ export default {
      })
    }
   },
- 
-
-
+  computed: {
+    ...mapState({
+      phone: state => state.user.phone,
+    }),
+  },
 }
 </script>
 <style  scoped>
