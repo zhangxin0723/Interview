@@ -1,29 +1,36 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-08-07 08:08:01
+ * @LastEditTime: 2019-08-09 11:00:14
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
   <div class="interviewDetail">
     <form action>
       <label for>
         <span>面试地址：</span>
-        <input type="text" placeholder="请输入公司名称" />
+        <p>{{signDetailData.company}}</p>
       </label>
       <label for>
         <span>面试时间：</span>
-        <input type="text" placeholder="2019-08-06 17:00" />
+        <p>{{signDetailData.start_time}}</p>
       </label>
       <label for>
         <span>联系方式：</span>
-        <input type="text" placeholder="13835973692" />
+        <p>{{signDetailData.phone}}</p>
       </label>
       <label for>
         <span>是否提醒：</span>
-        <p>未提醒</p>
+        <p>{{remind}}</p>
       </label>
       <label for>
         <span>面试状态：</span>
-        <p>未开始</p>
+        <p>{{status}}</p>
       </label>
       <label for>
         <span>取消提醒：</span>
-        <p>未开始</p>
+        <p><switch @change="switch1Change"/></p>
       </label>
     </form>
     <div class="choose">
@@ -33,14 +40,43 @@
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 export default {
   props: {},
   components: {},
   data() {
     return {};
   },
-  computed: {},
-  methods: {},
+  computed: {
+    ...mapState({
+      signDetailData: state => state.interview.signDetailData,
+    }),
+    remind(){
+      let str='';
+      if(this.signDetailData.remind === -1){
+        str='未提醒'
+      }else{
+        str='已提醒'
+      }
+      return str
+    },
+    status(){
+      let str='';
+      if(this.signDetailData.status === -1){
+        str = '未开始'
+      }else if(this.signDetailData.status === 0){
+        str = '已打卡'
+      }else{
+        str = '已放弃'
+      }
+      return str
+    }
+  },
+  methods: {
+    switch1Change(e){
+      console.log('switch1 发生 change 事件，携带值为', e.mp.detail.value)
+    },
+  },
   created() {},
   mounted() {}
 };

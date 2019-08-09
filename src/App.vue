@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-08-08 20:10:00
+ * @LastEditTime: 2019-08-09 08:50:40
+ * @LastEditors: Please set LastEditors
+ -->
 <script>
 import { login } from '@/service/index';
 export default {
@@ -15,6 +22,7 @@ export default {
      // 调用登陆接口
     wx.login({
       success: async (res)=>{ 
+        console.log(res)
         if (res.code) {
           //发起网络请求
           let data = await login(res.code);

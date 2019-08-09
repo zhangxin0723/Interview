@@ -1,8 +1,15 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-08-08 20:10:01
+ * @LastEditTime: 2019-08-09 08:37:24
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
   <div class="address">
       <div class='header'>
           <span>北京</span>
-          <input type="text" placeholder="面试地址" v-model="city" @input="search">
+          <input type="text" placeholder="面试地址" v-model="city" @input="search"  autofocus="autofocus">
       </div>
       <div class="addressList">
           <dl @click="checkAdd(item)"  

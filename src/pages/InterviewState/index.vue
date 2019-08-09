@@ -1,39 +1,72 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-08-07 11:56:17
+ * @LastEditTime: 2019-08-09 10:09:20
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
   <div class="interviewDetail">
     <form action>
       <label for>
         <span>面试地址：</span>
-        <p>请输入公司名称</p>
+        <p>{{interviewState.address}}</p>
       </label>
       <label for>
         <span>面试时间：</span>
-        <p>2019-08-06 17:00</p>
+        <p>{{interviewState.start_time}}</p>
       </label>
       <label for>
         <span>联系方式：</span>
-        <p>13835973692</p>
+        <p>{{interviewState.phone}}</p>
       </label>
       <label for>
         <span>是否提醒：</span>
-        <p>未提醒</p>
+        <p>{{remind}}</p>
       </label>
       <label for>
         <span>面试状态：</span>
-        <p>未开始</p>
+        <p>{{status}}</p>
       </label>
     </form>
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 export default {
   props: {},
   components: {},
   data() {
     return {};
   },
-  computed: {},
+  computed: {
+    ...mapState({
+      interviewState:state=>state.interview.interviewState
+    }),
+    remind(){
+      let str='';
+      if(this.interviewState.remind === -1){
+        str='未提醒'
+      }else{
+        str='已提醒'
+      }
+      return str
+    },
+    status(){
+      let str='';
+      if(this.interviewState.status === -1){
+        str = '未开始'
+      }else if(this.interviewState.status === 0){
+        str = '已打卡'
+      }else{
+        str = '已放弃'
+      }
+      return str
+    }
+  },
   methods: {},
-  created() {},
+  created() {
+  },
   mounted() {}
 };
 </script>
@@ -68,6 +101,10 @@ label p {
   flex: 1;
   height: 100%;
   line-height: 100rpx;
-  padding-left: 30rpx;
+  padding-left: 10rpx;
+  padding-right: 30rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 </style>

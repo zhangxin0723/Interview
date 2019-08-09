@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-08-08 20:10:01
+ * @LastEditTime: 2019-08-09 11:45:17
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
   <div @click="clickHandle" class="wrap">
     <map
@@ -69,7 +76,7 @@ map {
   width: 100%;
   height: 143rpx;
   left: 0;
-  bottom: 9%;
+  bottom: 8%;
 
 }
 .emil ul {

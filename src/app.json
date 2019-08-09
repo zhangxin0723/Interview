@@ -1,13 +1,13 @@
 {
   "pages": [
     "pages/home/main",
+    "pages/InterviewState/main",
+    "pages/InterviewDetail/main",
     "pages/interview/main",
     "pages/AddInterview/main",
     "pages/logs/main",
     "pages/personal/main",
     "pages/Address/main",
-    "pages/InterviewState/main",
-    "pages/InterviewDetail/main",
     "pages/information/main",
     "pages/clock/main",
     "pages/customer/main",

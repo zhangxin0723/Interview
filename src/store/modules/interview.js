@@ -2,10 +2,10 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-09 07:46:54
- * @LastEditTime: 2019-08-09 07:51:46
+ * @LastEditTime: 2019-08-09 10:49:52
  * @LastEditors: Please set LastEditors
  */
-import { sign, addSign } from '@/service'
+import { sign, addSign, signDetail } from '@/service'
 
 const moment = require('moment')
 function formatTime(start_time) {
@@ -15,6 +15,8 @@ function formatTime(start_time) {
 // 模块所有的状态
 const state = {
   viewList: [],
+  interviewState: {},
+  signDetailData: {}
 }
 
 
@@ -27,6 +29,16 @@ const mutations = {
     });
     console.log(payload)
     state.viewList = payload;
+  },
+  upInterviewState( state, payload ){
+    // console.log('payload...',payload)
+    state.interviewState = payload
+  },
+  //面试详情数据
+  upSignDetail(state, payload){
+    console.log(payload)
+    payload.start_time = formatTime(payload.start_time)
+    state.signDetailData = payload
   }
 }
 
@@ -60,12 +72,17 @@ const actions = {
       wx.showToast({
         title: res.msg,
         icon: 'success',
-        duration: 2000
+        duration: 4000
       })
       wx.navigateTo({
         url: "/pages/interview/main"
       })
     }
+  },
+  //获取面试详情
+  async signDetail({ commit }, payload){
+    let res = await signDetail(payload)
+    commit('upSignDetail', res.data)
   }
 }
 

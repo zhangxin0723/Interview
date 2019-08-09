@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-08 20:10:01
- * @LastEditTime: 2019-08-09 07:51:01
+ * @LastEditTime: 2019-08-09 10:42:02
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -19,7 +19,7 @@
     </ul>
     <div class="footer">
       <div v-if="viewList.length>0">
-        <ul v-for="(item,index) in viewList" :key="index">
+        <ul v-for="(item,index) in viewList" :key="index" @click="detil(item)">
           <li>
             <span>{{item.company}}</span>
             <span :class="{blues:item.status===0,pinks:item.status===1}">{{status}}</span>
@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapMutations } from "vuex";
 export default {
   data() {
     return {
@@ -84,21 +84,21 @@ export default {
   methods: {
     ...mapActions({
       sign: 'interview/getLocation',
-      signCont:'interview/getLocation'
+      signCont:'interview/getLocation',
+      signDetail: 'interview/signDetail'
+    }),
+    ...mapMutations({
+      upInterviewState: 'interview/upInterviewState'
     }),
     clockId: function(index, status) {
       this.colorId = index;
       this.sign({ status });
     },
-    detil:function(item){
-      //address.address 地址
-      //.start_time 时间
-      //phone//手机号
-      //name/提醒
-      //remind放弃
-      //跳转详情
+    detil(item){
+      this.upInterviewState(item)
+      this.signDetail(item.id)
       wx.navigateTo({
-        url: '/pages/information/main?address=' + item.address.address + '&startTime=' + item.start_time+'&phone='+item.phone+'&name='+item.name+'&remind='+item.remind+'&statusIId='+this.status_Id
+        url: '/pages/InterviewDetail/main'
       })
     }
   },
