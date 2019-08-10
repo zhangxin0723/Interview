@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-09 07:46:54
- * @LastEditTime: 2019-08-10 07:55:16
+ * @LastEditTime: 2019-08-10 08:28:43
  * @LastEditors: Please set LastEditors
  */
 import { sign, addSign, signDetail, updateSign } from '@/service'
@@ -71,7 +71,8 @@ const actions = {
     let res = await updateSign(payload)
     if (res.code === 0) {
       console.log(res, "------------------------")
-      await dispatch('signDetail', { id })
+     let data = await dispatch('signDetail', { id })
+     console.log(data,"data....")
     }
   }
 }
