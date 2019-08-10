@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-09 15:20:15
- * @LastEditTime: 2019-08-10 07:55:01
+ * @LastEditTime: 2019-08-10 08:01:37
  * @LastEditors: Please set LastEditors
  */
 import { decrypt, updatePhone } from '@/service'
@@ -30,11 +30,11 @@ const mutations = {
 const actions = {
   //解密
   async decrypt({ commit }, payload) {
-    await decrypt(payload)
+    let res = await decrypt(payload)
+    commit('upPhone', res)
     if (res.code === 0) {
       await updatePhone({ phone: (res.data.phoneNumber) * 1 })
     }
-    commit('upPhone', res)
   }
 }
 
