@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-09 07:54:01
- * @LastEditTime: 2019-08-09 16:13:16
+ * @LastEditTime: 2019-08-11 19:20:09
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -56,6 +56,15 @@ export default {
       phone: state => state.user.phone,
     }),
   },
+  created(){
+    wx.startSoterAuthentication({
+      requestAuthModes: ['fingerPrint'],
+      challenge: '123456',
+      authContent: '请用指纹解锁',
+      success(res) {
+      }
+    })
+  }
 }
 </script>
 <style  scoped>

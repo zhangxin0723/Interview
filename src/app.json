@@ -6,12 +6,7 @@
     "pages/interview/main",
     "pages/AddInterview/main",
     "pages/logs/main",
-    "pages/Address/main",
-    "pages/information/main",
-    "pages/clock/main",
-    "pages/customer/main",
-    "pages/counter/main"
-   
+    "pages/Address/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
