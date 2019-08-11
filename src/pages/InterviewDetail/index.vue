@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-07 08:08:01
- * @LastEditTime: 2019-08-10 07:55:38
+ * @LastEditTime: 2019-08-11 20:35:40
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -18,7 +18,7 @@
       </label>
       <label for>
         <span>联系方式：</span>
-        <p>{{signDetailData.phone}}</p>
+        <p @click="makePhone">{{signDetailData.phone}}</p>
       </label>
       <label for>
         <span>是否提醒：</span>
@@ -104,7 +104,11 @@ export default {
           }
         }
       });
-    }
+    },
+    //电话
+    makePhone() {
+      wx.makePhoneCall({ phoneNumber: this.signDetailData.phone });
+    },
   },
   created() {},
   mounted() {}

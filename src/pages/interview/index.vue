@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-08 20:10:01
- * @LastEditTime: 2019-08-09 15:07:54
+ * @LastEditTime: 2019-08-11 20:26:38
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -27,7 +27,9 @@
           <li>{{item.address}}</li>
           <li>
             <span>面试时间：{{item.start_time}}</span>
-            <span :class="{grays:item.status === 1,blues:item.status===-1}">{{item.remind === -1 ? "未提醒" : "已提醒"}}</span>
+            <span
+              :class="{grays:item.status === 1,blues:item.status===-1}"
+            >{{item.remind === -1 ? "未提醒" : "已提醒"}}</span>
           </li>
         </ul>
       </div>
@@ -56,10 +58,10 @@ export default {
         },
         {
           name: "全部",
-          status: null,
+          status: null
         }
       ],
-      colorId: 0,
+      colorId: 0
     };
   },
   computed: {
@@ -83,30 +85,28 @@ export default {
   },
   methods: {
     ...mapActions({
-      sign: 'interview/getLocation',
-      signCont:'interview/getLocation',
-      signDetail: 'interview/signDetail'
+      sign: "interview/getLocation",
+      signCont: "interview/getLocation",
+      signDetail: "interview/signDetailData"
     }),
     ...mapMutations({
-      upInterviewState: 'interview/upInterviewState'
+      upInterviewState: "interview/upInterviewState"
     }),
     clockId: function(index, status) {
       this.colorId = index;
       this.sign({ status });
     },
-    detil(item){
-      this.upInterviewState(item)
-      this.signDetail(item.id)
+    detil(item) {
+      this.upInterviewState(item);
+      this.signDetail(item.id);
       wx.navigateTo({
-        url: '/pages/InterviewDetail/main'
-      })
+        url: "/pages/InterviewDetail/main"
+      });
     }
   },
-  created() {
-    
-  },
-  onShow(){
-    this.sign({ status: -1 })
+  created() {},
+  onShow() {
+    this.sign({ status: -1 });
   }
 };
 </script>
@@ -178,10 +178,10 @@ export default {
   justify-content: space-between;
   align-items: center;
 }
- .footer ul li:last-of-type span:first-of-type {
+.footer ul li:last-of-type span:first-of-type {
   font-size: 30rpx;
   /* color: #666666; */
-} 
+}
 .footer ul li:last-of-type span:last-of-type,
 .footer ul li:last-of-type span:nth-of-type(2) {
   font-size: 25rpx;
@@ -189,7 +189,7 @@ export default {
   padding: 15rpx 20rpx;
   /* background: #fef0f0; */
   border-radius: 5rpx;
-} 
+}
 .none {
   width: 100%;
   height: 100%;

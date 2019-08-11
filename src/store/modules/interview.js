@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-09 07:46:54
- * @LastEditTime: 2019-08-10 08:28:43
+ * @LastEditTime: 2019-08-11 21:01:23
  * @LastEditors: Please set LastEditors
  */
 import { sign, addSign, signDetail, updateSign } from '@/service'
@@ -60,19 +60,16 @@ const actions = {
     }
   },
   //获取面试详情
-  async signDetail({ commit }, payload) {
+  async signDetailData({ commit }, payload) {
     let res = await signDetail(payload)
     commit('upSignDetail', res.data)
   },
   //更新面试信息
   async updateSign({ commit, dispatch }, payload) {
     let { id } = payload;
-    console.log(id, "++++++++++++++++++++")
     let res = await updateSign(payload)
     if (res.code === 0) {
-      console.log(res, "------------------------")
-     let data = await dispatch('signDetail', { id })
-     console.log(data,"data....")
+      await dispatch('signDetailData',  id )
     }
   }
 }
