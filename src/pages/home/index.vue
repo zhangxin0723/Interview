@@ -2,18 +2,19 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-08 20:10:01
- * @LastEditTime: 2019-08-10 07:55:41
+ * @LastEditTime: 2019-08-12 10:02:47
  * @LastEditors: Please set LastEditors
  -->
 <template>
   <div @click="clickHandle" class="wrap">
-    <map
+    <!-- <map
       id="map"
       show-location
       :markers="markers"
       :longitude="longitude"
       :latitude="latitude"
-    ></map>
+    ></map> -->
+    <plat></plat>
     <div class="emil">
       <ul>
          <li class="icon iconfont"  @click="location">&#xe63b;</li>
@@ -27,11 +28,11 @@
 </template>
 
 <script>
-
 import { mapState , mapActions } from 'vuex';
+import plat from '../plat'
 export default {
   components: {
-    
+    plat
   },
   data(){
     return {

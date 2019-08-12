@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-07 08:08:01
- * @LastEditTime: 2019-08-11 20:35:40
+ * @LastEditTime: 2019-08-12 11:27:48
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -36,7 +36,7 @@
       </label>
     </form>
     <div class="choose" v-if="signDetailData.status !== 1">
-      <button>去打卡</button>
+      <button @click="card">去打卡</button>
       <button @click="giveUp">放弃面试</button>
     </div>
   </div>
@@ -73,11 +73,6 @@ export default {
       }
       return str;
     }
-    // showFlag(){
-    //   if(signDetailData.status !== 1){
-    //     return  false
-    //   }
-    // }
   },
   methods: {
     ...mapActions({
@@ -109,6 +104,12 @@ export default {
     makePhone() {
       wx.makePhoneCall({ phoneNumber: this.signDetailData.phone });
     },
+    //去打卡
+    card(){
+      wx.navigateTo({
+        url: "/pages/clockInfo/main"
+      })
+    }
   },
   created() {},
   mounted() {}

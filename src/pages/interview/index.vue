@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-08 20:10:01
- * @LastEditTime: 2019-08-11 20:26:38
+ * @LastEditTime: 2019-08-12 09:54:52
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -94,7 +94,7 @@ export default {
     }),
     clockId: function(index, status) {
       this.colorId = index;
-      this.sign({ status });
+      this.sign({ status: status, pageSize: 1000});
     },
     detil(item) {
       this.upInterviewState(item);
@@ -106,7 +106,14 @@ export default {
   },
   created() {},
   onShow() {
-    this.sign({ status: -1 });
+    this.sign({ status: -1, pageSize: 1000});
+  },
+  onReachBottom() {
+    console.log("上拉加载")
+    // if (this.hasMore) {
+    //   this.updatePage({ page: this.page + 1 });
+    // }
+    // this.getList();
   }
 };
 </script>
@@ -145,8 +152,13 @@ export default {
   display: flex;
   flex-direction: column;
   background: #fff;
-  overflow-y: auto;
+  overflow: hidden;
   margin-top: 20rpx;
+}
+.footer div:nth-child(1){
+  /* width: 100%;
+  height: 100%;
+  overflow-y: auto; */
 }
 .footer ul {
   display: flex;
